@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeSortie{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="card text-white bg-secondary mb-3 card-profile" style="max-width: 20rem;">
+        <div class="card-header"> <h1>Type de sortie <span class="badge">{{ type_sortie.id }}</span></h1></div>
+        <div class="card-body">
+            <h4 class="card-title">{{ type_sortie.nom }}</h4>
+            {% if type_sortie.icone  %}
+                <img style="height: 40px;height: 40px"  id="photo_profil" src="{{asset('uploads/iconesSorties/'~ type_sortie.icone)}}" alt="icone type de sortie">
+            {% else %}
+                <img style="height: 40px;height: 40px;"  id="photo_profil" src="{{asset('uploads/iconesSorties/')}}" alt="icone type de sortie">
+            {% endif %} 
+            <div class="form-group mt-4">
+                <a href="{{ path('type_sortie_edit', {'id': type_sortie.id}) }}" class="btn btn-warning">Modifier</a> 
+                {{ include('type_sortie/_delete_form.html.twig') }}
+            </div>
+        </div>    
+    </div>
+    <a href="{{ path('type_sortie_index') }}" class="btn btn-light">Retour à la liste des types</a>
+</div>
+
+
+   
+
+    
+
+  
+{% endblock %}

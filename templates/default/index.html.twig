@@ -1,0 +1,107 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}{{parent()}} Accueil{% endblock %}
+
+
+{% block side_bar_left %}
+<div class="accordion" id="accordionExample1">
+     <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample1">
+      <div class="card-body">
+       <div id="calendrier"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock side_bar_left %}
+
+{% block content_main %}
+<div class="accordion" id="accordionExample2">
+     <div class="card">
+          <div class="card-header" id="headingTwo">
+               <h5 class="mb-0">
+               <button class="btn btn-link " type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Collapsible Group Item #2   
+              {% if app.user %}
+               </button> <a class="btn btn-outline-secondary btn-sm "href="{{ path('sortie_new') }}">Créer sortie <i class="fa fa-plus" aria-hidden="true"></i></a>
+               {% endif %}
+               </h5> 
+          </div>
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample2">
+      <div class="card-body">
+        <table class="table table-hover" style="text-align: center;">
+          <thead>
+         
+          </thead>
+          <tbody>
+
+           {% for year in sorties %}
+             <tr>
+                      <th scope="col">Date</th>
+                    <th scope="col">intitulé</th>
+                    <th scope="col">Participants</th>
+                      <th scope="col">Organisateur</th>
+          
+                </tr>
+              {% for mois,jours in year %}
+                  <tr class="table-primary"><th colspan="4" >{{mois}} </th></tr>  
+                      {% for jour,sorties in jours %}
+                        <tr align="left"  class="table-light"><th colspan="4" >{{jour}}</th></tr>
+                              {% for sortie in sorties %}
+                                <tr >
+                                    <th >{{sortie.heureSortie}}</th>
+                                    <td><a href="{{ path('sortie_show', {'id': sortie.id}) }}">{{sortie.intitule}}</a></td>
+                                    <td>{{'1/12'}}</td>
+                                    <td ><a class="pseudo-{{sortie.sexe}}" href="{{ path('sortie_show', {'id': sortie.organisateur}) }}">{{sortie.username}}</a></td>
+                                </tr>
+                              {% endfor %}
+                        
+                      {% endfor %}
+              {% endfor %}
+         {% else %}
+            <tr>
+                <td colspan="2">Aucune sortie</td>
+            </tr>
+        {% endfor %}
+          </tbody>
+     </table> 
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content_main %}
+
+{% block side_bar_right %}
+<div class="accordion" id="accordionExample3">     
+     <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link " type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample3">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+ </div> 
+{% endblock side_bar_right %}
+
+
+{% block javascripts %}
+
+
+
+     <script src="{{ asset('js/datepicker.js') }}"></script>
+{% endblock javascripts %}

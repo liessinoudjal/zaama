@@ -1,0 +1,212 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="fos_user_user_show">
+  <div class="card border-secondary mb-3 card-profile" >
+    <div class="card-header">
+        <h3 class="card-title">
+            <span class="badge badge-pill badge-secondary">
+                {{ user.username }}
+            </span>
+            <span class="float-right">Inscrit depuis le {{ user.dateInscription|date("d-M-Y") }}</span>
+        </h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="text-center">
+            {% if user.profile.photo %}
+              <img style="max-height: 200px;min-height: 115px;max-width:438px;min-width:250px;"  id="photo_profil" src="{{asset('uploads/profilePhoto/'~ user.profile.photo)}}" alt="photo de profil">
+            {% else %}
+               <img style="max-height: 200px;min-height: 115px;max-width:438px;min-width:250px;"  id="photo_profil" src="{{asset('uploads/profilePhoto/Default2-'~ user.sexe ~'.jpg')}}" alt="photo de profil">
+            {% endif %}  
+              <button data-toggle="modal" data-target="#modal-photo" data-backdrop="static" class="btn btn-outline-warning " title="Modifier ma photo"><i class="fas fa-edit"></i></button>
+          </p>
+        
+        </div>
+        <div class="col-md-6">
+            <p class="card-text">
+                <p><i class="fab fa-teamspeak"></i> Description </p> 
+                <p><span id="show-description">{{ user.profile.description |nl2br  }}</span><p>
+                 <button data-toggle="modal" data-target="#modal-description" data-backdrop="static" class="btn btn-outline-warning float-right" title="Modifier ma description"><i class="fas fa-edit"></i></button>
+              </p>
+        </div>
+        
+      </div>  
+      
+      <div class="row">
+          <div class=" col-md-6">
+              {% if user.isHomme %}
+              <p class="card-text"><i class="fas fa-male"></i> {{ user.prenom }}</p>
+              {% else %}
+               <p class="card-text"><i class="fas fa-female"></i> {{ user.prenom }}</p>
+              {% endif %}
+              <p class="card-text"><i class="fas fa-at"></i> {{ user.email }}</p>
+              <p><i class="fas fa-birthday-cake"></i> {{user.dateBirth|localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y')}} ({{user.age}} ans)</p>
+               <p><a class="btn btn-outline-warning" href="{{path('change_password')}}"><i class="fas fa-unlock-alt"></i> modifier mon mot de passe</a></p>
+          </div>
+          <div class="col-md-6">
+              <p class="card-text">
+                <i class="fas fa-heartbeat"></i>
+                <span id="show-situation">Situation : {{ user.profile.situation }}</span>
+                <button data-toggle="modal" data-target="#modal-situation" data-backdrop="static" class="btn btn-outline-warning float-right" title="Modifier ma situation"><i class="fas fa-edit"></i></button>
+              </p>
+              <p>
+                <i class="fas fa-map-marker-alt"></i> 
+                <span id="show-departement">Departement : {{ user.profile.departement.nom }}</span>  
+                <button data-toggle="modal" data-target="#modal-departement" data-backdrop="static" class="btn btn-outline-warning float-right" title="Modifier mon département"><i class="fas fa-edit"></i></button>
+              </p>
+              
+             
+          </div>
+      </div>
+  </div>
+</div>
+
+ <!-- modal departement-->
+              <div class="modal" id="modal-departement">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Département</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formEditDepartement, { 'attr': { 'class': 'form-profile','id' : 'form-departement' } }) }}
+                       {{ form_widget(formEditDepartement) }}
+                    </div>
+                    <div class="modal-footer">
+                  
+                      <button type="submit" data-field="departement" data-profile="{{user.profile.id}}" id="btn-update-departement"class="btn btn-outline-primary">Enregistrer</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                    {{ form_end(formEditDepartement) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- endmodal --> 
+ <!-- modal situation-->
+              <div class="modal" id="modal-situation">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Situation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formEditSituation, { 'attr': { 'class': 'form-profile','id' : 'form-situation' } }) }}
+                       {{ form_widget(formEditSituation) }}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" data-field="situation" data-profile="{{user.profile.id}}" id="btn-update-situation"class="btn btn-outline-primary">Enregistrer</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                    {{ form_end(formEditSituation) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- endmodal --> 
+<!-- modal description-->
+              <div class="modal" id="modal-description">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Description</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formEditDescription, { 'attr': { 'class': 'form-profile','id' : 'form-description' } }) }}
+                       {{ form_widget(formEditDescription) }}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" data-field="description" data-profile="{{user.profile.id}}" id="btn-update-description"class="btn btn-outline-primary">Enregistrer</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                    {{ form_end(formEditDescription) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- endmodal --> 
+ <!-- modal photo-->
+              <div class="modal" id="modal-photo">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modifier ma photo</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formEditPhoto, { 'action': path('edit_profile_photo_user',{id: user.id}) , 'attr': { 'class': 'form-profile','id' : 'form-photo' } }) }}
+                       {{ form_widget(formEditPhoto) }}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" data-field="photo" data-profile="{{user.profile.id}}" id="btn-update"class="btn btn-outline-primary">Modifier</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+                    {{ form_end(formEditPhoto) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+<!-- endmodal --> 
+
+
+<!--accordion -->
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+

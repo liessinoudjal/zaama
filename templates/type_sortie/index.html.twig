@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeSortie index{% endblock %}
+
+{% block body %}
+    
+    <div class="container-fluid">
+        <h1>Liste des types      de sortie</h1>
+         <a href="{{ path('type_sortie_new') }}" class="btn btn-primary">Créer type</a>
+        <table class="table table-sm table-striped ">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Icone</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for type_sortie in type_sorties %}
+                <tr>
+                    <td>{{ type_sortie.id }}</td>
+                    <td>{{ type_sortie.nom }}</td>
+                    <td>{{ type_sortie.icone }}</td>
+                    <td>
+                        <a href="{{ path('type_sortie_show', {'id': type_sortie.id}) }}" class="btn btn-info">Voir</a>
+                        <a href="{{ path('type_sortie_edit', {'id': type_sortie.id}) }}" class="btn btn-warning">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Pas de type créé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+
+   
+{% endblock %}

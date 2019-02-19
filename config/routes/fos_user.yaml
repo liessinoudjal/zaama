@@ -1,0 +1,23 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+fos_user_registration_register:
+    path: /register
+    controller: App\Controller\FOSUserBundle\RegistrationController::registerAction
+fos_user_registration_check_email:
+    path: /register/check-email
+    controller: App\Controller\FOSUserBundle\RegistrationController::checkEmailAction
+fos_user_registration_confirmed:
+    path: /register/confirmed
+    controller: App\Controller\FOSUserBundle\RegistrationController::confirmedAction
+fos_user_registration_confirm:
+    path: /register/confirm/{token}
+    controller: App\Controller\FOSUserBundle\RegistrationController::confirmAction
+fos_user_profile_show:
+    path: /profile
+    controller: App\Controller\FOSUserBundle\ProfileController::showAction
+fos_user_profile_edit:
+    path: /profile/edit
+    controller: App\Controller\FOSUserBundle\ProfileController::editAction
+fos_user_change_password:
+    path: /profile/change-password
+    controller: App\Controller\FOSUserBundle\ProfileController::changePasswordAction

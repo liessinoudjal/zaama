@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+
+ 
+{% block body %}
+     <div class="container">
+        <div class="row">
+            <div class="col-md-3 side-bar">
+                {% block side_bar_left %}
+                {% endblock side_bar_left %}
+                
+            </div>
+            
+            <div class="col-md-6 content-main">
+                {% block content_main %}
+                {% endblock content_main %}
+            </div>
+            <div class="col-md-3 side-bar">
+                {% block side_bar_right %}
+                {% endblock side_bar_right %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+      <script src="{{ asset('js/datepicker.js') }}"></script>
+{% endblock %}

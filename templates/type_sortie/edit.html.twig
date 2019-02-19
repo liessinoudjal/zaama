@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TypeSortie{% endblock %}
+
+{% block body %}
+    <h1>Edit TypeSortie</h1>
+
+    {{ include('type_sortie/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('type_sortie_index') }}">back to list</a>
+
+    {{ include('type_sortie/_delete_form.html.twig') }}
+{% endblock %}

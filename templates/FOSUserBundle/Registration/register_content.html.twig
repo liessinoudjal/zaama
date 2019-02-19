@@ -1,0 +1,36 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="jumbotron">
+ <div class="card text-white bg-secondary mb-3" style="">
+  <div class="card-header">Inscription</div>
+  <div class="card-body">
+   {{ form_start(form, {'method': 'post', 'action': path('register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-outline-primary" />
+    </div>
+{{ form_end(form) }}
+  </div>
+</div>
+
+
+<div class="jumbotron">
+  <h1 class="display-3">Hello, world!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </p>
+</div>
+<div class="card text-white bg-primary mb-3 card-register" style="max-width: 20rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h4 class="card-title">Primary card title</h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+{% block javascripts %}
+  <script src="{{ asset('js/FOSUserBundle/register.js') }}"></script>
+{% endblock %}

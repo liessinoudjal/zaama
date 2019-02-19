@@ -1,0 +1,95 @@
+<div class="jumbotron">
+{{ form_start(form) }}
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
+                {{ form_label(form.dateSortie, 'Date de votre sortie', {'label_attr': {}}) }}
+                <div>
+                    {{ form_widget(form.dateSortie, {'attr': {'class': 'form-control date-sortie'}}) }}
+                </div>           
+            </div>
+             <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_label(form.heure, null,{'label': 'Heure','label_attr':{} }) }}
+                        <div>
+                            {{ form_widget(form.heure, {'attr': {'class':'form-control select2'}}) }}
+                        </div>
+                    </div>
+                
+                    <div class="col-md-6">
+                        {{ form_label(form.minute, null,{'label': 'Minute','label_attr':{} }) }}
+                        <div>
+                            {{ form_widget(form.minute, {'attr': {'class':'form-control select2'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-3">
+                {{ form_label(form.intitule, null,{'label': 'intitulé de la sortie','label_attr':{} }) }}
+                <div>
+                    {{ form_widget(form.intitule, {'attr': {'class':'form-control'}}) }}
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="row">
+        <div class="col-md-3">
+              {{ form_label(form.typeSortie, null,{'label': 'Type','label_attr':{} }) }}
+                <div> 
+                    {{ form_widget(form.typeSortie, {'attr': {'class':'form-control select2'}}) }}
+                </div>
+            </div>
+        </div>
+         <div class="row">
+             <div class="col-md-3">
+              {{ form_label(form.entreFille, null,{'label': 'Sortie entre fille ?','label_attr':{} }) }}
+                <div> 
+                    {{ form_widget(form.entreFille, {'attr': {'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                         {{ form_label(form.nbPersonneMax, null,{'label': 'Nombre de personnes','label_attr':{} }) }}
+                    </div>
+               
+                    <div class="col-md-4"> 
+                        {{ form_widget(form.nbPersonneMax, {'attr': {'class':'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-3">
+              {{ form_label(form.portable, null,{'label': 'Votre numero','label_attr':{} }) }}
+                <div> 
+                    {{ form_widget(form.portable, {'attr': {'class':'form-control'}}) }}
+                </div>
+            </div>
+
+         
+         </div>
+         <div class="row">
+             <div class="col-md-12">
+              {{ form_label(form.presentation, null,{'label': 'Présentation de votre sortie :','label_attr':{} }) }}
+                <div> 
+                    {{ form_widget(form.presentation, {'attr': {'rows':'20','cols':'80','class':'form-control'}}) }}
+                </div>
+            </div>
+         </div>
+           
+    </div>
+
+     {{ form_rest(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+</div>
+
+{% block javascripts %}
+<script src="{{ asset('js/select.js') }}"></script>
+{% endblock %}
+
+
+

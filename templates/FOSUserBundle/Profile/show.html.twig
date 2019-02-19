@@ -1,0 +1,16 @@
+{% extends "layout.html.twig" %}
+    {% block stylesheets %}
+    
+    {% endblock stylesheets %}  
+
+
+{% block fos_user_content %}
+<div class="jumbotron">
+{% include "FOSUserBundle/Profile/show_content.html.twig" %}
+</div>
+
+{% endblock fos_user_content %}
+
+ {% block javascripts %}
+        <script src="{{ asset('js/FOSUserBundle/profile.js') }}"></script>
+ {% endblock javascripts %}

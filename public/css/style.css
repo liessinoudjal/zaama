@@ -1,0 +1,43 @@
+body{
+    font: bold 16px sans-serif;
+}
+.navbar-brand
+{font-family:  'Cookie', cursive;
+	color:  #ffffff;
+	font: normal 36px 'Cookie', cursive;
+
+}
+
+.navbar-brand span{
+	color:  #5383d3;
+}
+.card-register{
+    margin:0 auto ;
+    min-width: 20rem;
+    max-width: 80%;
+}
+.card-profile{
+    margin:0 auto ;
+    min-width: 30rem;
+    width: 100%;
+    padding:10px 20px;
+}
+.side-bar{
+    min-width: 253px;
+}
+.content-main{
+    min-width:450px;
+}
+
+.pseudo-H{
+    font-family:  'Cookie', cursive;
+    font-size: 18px;
+    font-weight: bold;
+    color : rgb(29, 41, 212);
+}
+.pseudo-F{
+    font-family:  'Cookie', cursive;
+    font-size: 18px;
+    font-weight: bold;
+    color :rgb(231, 81, 106);
+}
