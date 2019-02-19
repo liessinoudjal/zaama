@@ -87,7 +87,7 @@ class RegistrationController extends BaseRegistrationController
 
                 return $response;
             }
-           
+           // dd($form->getErrors());
             $event = new FormEvent($form, $request);
             $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
 

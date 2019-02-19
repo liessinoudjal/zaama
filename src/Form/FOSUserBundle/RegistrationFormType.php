@@ -45,11 +45,9 @@ class RegistrationFormType extends BaseType
                         'autocomplete' => 'new-password',
                     ),
                 ),
-                'first_name'=>'first',
                 'first_options' => array('label' => 'form.password'),
-                'second_name'=>'second',
                 'second_options' => array('label' => 'form.password_confirmation'),
-                'invalid_message' => 'fos_user.password.mismatch',
+               // 'invalid_message' => 'Les mots de pass doivent être identiques',
                 'required'=>true,
                 'help' => 'Au moins 8 caractères alpha numeriques (chiffre + minuscule + majuscule)',
             ))

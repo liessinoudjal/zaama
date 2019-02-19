@@ -11,18 +11,21 @@
         {{ form_label(form.sexe, null,{'label': 'Sexe *','label_attr':{} }) }}
         <div>
             {{ form_widget(form.sexe, {'attr': {'class':'form-control select2'}}) }}
+              <span class="badge badge-pill badge-danger">{{ form_errors(form.sexe) }}</span>
         </div>
       </div>
       <div class="col-md-5">
          {{ form_label(form.username, null,{'label': 'Nom d\'utilisateur','label_attr':{} }) }}
         <div>
             {{ form_widget(form.username, {'attr': {'class':'form-control'}}) }}
+             <span class="badge badge-pill badge-danger">{{ form_errors(form.username) }}</span>
         </div>
       </div>
       <div class="col-md-5">
          {{ form_label(form.prenom, null,{'label': 'Prenom. Le vrai ! lol','label_attr':{} }) }}
         <div>
             {{ form_widget(form.prenom, {'attr': {'class':'form-control'}}) }}
+             <span class="badge badge-pill badge-danger">{{ form_errors(form.prenom) }}</span>
         </div>
       </div>
       <div class="col-md-3"></div>
@@ -31,13 +34,15 @@
       <div class="col-md-2">
          {{ form_label(form.dateBirth, null,{'label': 'Date de naissance','label_attr':{} }) }}
         <div>
-            {{ form_widget(form.dateBirth, {'attr': {'class':'form-control'}}) }}
+            {{ form_widget(form.dateBirth, {'attr': {'class':'form-control date-birth'}}) }}
+             <span class="badge badge-pill badge-danger">{{ form_errors(form.dateBirth) }}</span>
         </div>
       </div>
       <div class="col-md-5">
            {{ form_label(form.email, null,{'label': 'E-mail','label_attr':{} }) }}
         <div>
             {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+             <span class="badge badge-pill badge-danger">{{ form_errors(form.email) }}</span>
         </div>
       </div>
     </div>
@@ -46,19 +51,26 @@
          {{ form_label(form.plainPassword.first, null,{'label': 'Mot de passe','label_attr':{} }) }}
         <div>
             {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control'}}) }}
+             <span class="badge badge-pill badge-danger">{{ form_errors(form.plainPassword.first) }}</span>
         </div>
-        <span class="text-dark"> {{ form_help(form.plainPassword) }}</span>
+        <span class="text-dark">{{ form_help(form.plainPassword) }}</span>
       </div>
       <div class="col-md-4">
          {{ form_label(form.plainPassword.second, null,{'label': 'Confirmer mot de passe','label_attr':{} }) }}
         <div>
             {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control'}}) }}
+              <span class="badge badge-pill badge-danger">{{ form_errors(form.plainPassword.second) }}</span>
         </div>
       </div>
     </div>
-    {#form_rest(form) #}
-    <div class="form-group">
+    {{form_rest(form) }}
+    <div class="form-group row">
+      <div class="col-md-3">
         <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-outline-primary" />
+      </div>
+      <div class="col-md-6">
+  
+      </div>
     </div>
 {{ form_end(form) }}
   </div>
