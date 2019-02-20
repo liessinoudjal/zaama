@@ -118,6 +118,10 @@ class Sortie
         $this->setMinute(0);
     }
 
+    public function __toString()
+    {
+        return empty($this->getIntitule())? "Sortie": "Sortie : ". $this->getIntitule();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -315,10 +319,11 @@ class Sortie
 
     public function getHeureSortie() :string
     {
+            $this->setHeureSortie();
             return $this->heureSortie;
     }
 
-    public function setHeureSortie(){
+    public function setHeureSortie($heure = null){
         $this->heureSortie = $this->getHeure().":".$this->getMinute();
     }
 
@@ -329,5 +334,15 @@ class Sortie
             return $number;
     }
 
+    /**
+     * Set the value of createdAt
+     *
+     * @return  self
+     */ 
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
 
+        return $this;
+    }
 }
