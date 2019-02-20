@@ -48,12 +48,12 @@
           <div class="col-md-6">
               <p class="card-text">
                 <i class="fas fa-heartbeat"></i>
-                <span id="show-situation">Situation : {{ user.profile.situation }}</span>
+               Situation : <span id="show-situation"> {{ user.profile.situation }}</span>
                 <button data-toggle="modal" data-target="#modal-situation" data-backdrop="static" class="btn btn-outline-warning float-right" title="Modifier ma situation"><i class="fas fa-edit"></i></button>
               </p>
               <p>
                 <i class="fas fa-map-marker-alt"></i> 
-                <span id="show-departement">Departement : {{ user.profile.departement.nom }}</span>  
+                Departement :<span id="show-departement"> {{ user.profile.departement.nom }}</span>  
                 <button data-toggle="modal" data-target="#modal-departement" data-backdrop="static" class="btn btn-outline-warning float-right" title="Modifier mon département"><i class="fas fa-edit"></i></button>
               </p>
               
@@ -75,7 +75,13 @@
                     </div>
                     <div class="modal-body">
                      {{ form_start(formEditDepartement, { 'attr': { 'class': 'form-profile','id' : 'form-departement' } }) }}
-                       {{ form_widget(formEditDepartement) }}
+                     <div class="form-group row">
+                      <div class="col-md-4">
+                          {{ form_widget(formEditDepartement.departement  ,  { 'attr' : {'class':'form-control select2'} } ) }}
+                      </div>
+                     
+                     </div>
+                      
                     </div>
                     <div class="modal-footer">
                   
@@ -99,7 +105,7 @@
                     </div>
                     <div class="modal-body">
                      {{ form_start(formEditSituation, { 'attr': { 'class': 'form-profile','id' : 'form-situation' } }) }}
-                       {{ form_widget(formEditSituation) }}
+                       {{ form_widget(formEditSituation.situation ,  { 'attr' : {'class':'form-control select2'}   }  ) }}
                     </div>
                     <div class="modal-footer">
                       <button type="submit" data-field="situation" data-profile="{{user.profile.id}}" id="btn-update-situation"class="btn btn-outline-primary">Enregistrer</button>

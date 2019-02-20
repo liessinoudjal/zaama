@@ -1,5 +1,3 @@
-
-  //$('div[class^="p-edit-"]').hide();
     $('button[id^="btn-update-"]').on("click",function(e){
       e.preventDefault();
       console.log($(this));
@@ -7,7 +5,7 @@
       var field = $(this).data('field');
       var inputValue = $('#form-'+field+ ' :input').val();
      console.log( Routing.generate('edit_profile_user', { id: ProfileUserId, field: field,inputValue : inputValue }) );
-   /*  $.ajax({
+    $.ajax({
       url: Routing.generate('edit_profile_user', { id: ProfileUserId }) ,
       type: "post",
       data : {"field": field,"inputValue" : inputValue},
@@ -24,6 +22,6 @@
       complete : function(resultat, statut){
           $('.modal#modal-'+field).modal('toggle');
       }
-    });*/
+    });
     });
   
