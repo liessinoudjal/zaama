@@ -41,3 +41,19 @@ body{
     font-weight: bold;
     color :rgb(231, 81, 106);
 }
+
+.badge-H{
+    font-family:  'Cookie', cursive;
+    font-size: 22px;
+    font-weight: bold;
+    color : white;
+    background-color :rgb(29, 41, 212);
+}
+
+.badge-F{
+    font-family:  'Cookie', cursive;
+    font-size: 22px;
+    font-weight: bold;
+    color : white;
+    background-color :rgb(231, 81, 106);
+}

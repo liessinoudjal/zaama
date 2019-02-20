@@ -1,0 +1,57 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="fos_user_user_show">
+  <div class="card border-secondary mb-3 card-profile" >
+    <div class="card-header">
+        <h3 class="card-title">
+            <span class="badge badge-pill badge-{{user.sexe}}">
+                {{ user.username }}
+            </span>
+            <span class="float-right">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</span>
+        </h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="text-center">
+            {% if user.profile.photo %}
+              <img style="max-height: 200px;min-height: 115px;max-width:438px;min-width:250px;"  id="photo_profil" src="{{asset('uploads/profilePhoto/'~ user.profile.photo)}}" alt="photo de profil">
+            {% else %}
+               <img style="max-height: 200px;min-height: 115px;max-width:438px;min-width:250px;"  id="photo_profil" src="{{asset('uploads/profilePhoto/Default2-'~ user.sexe ~'.jpg')}}" alt="photo de profil">
+            {% endif %} 
+          </p>
+        </div>
+        <div class="col-md-6">
+            <p class="card-text">
+                <p><i class="fab fa-teamspeak"></i> Description </p> 
+                <p><span id="show-description">{{ user.profile.description |nl2br  }}</span><p>
+              </p>
+        </div>
+        
+      </div>  
+      
+      <div class="row">
+          <div class=" col-md-6">
+              {% if user.isHomme %}
+              <p class="card-text"><i class="fas fa-male"></i> {{ user.prenom }}</p>
+              {% else %}
+               <p class="card-text"><i class="fas fa-female"></i> {{ user.prenom }}</p>
+              {% endif %}
+              <p><i class="fas fa-birthday-cake"></i> {{user.dateBirth|localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y')}} ({{user.age}} ans)</p>
+            
+          </div>
+          <div class="col-md-6">
+              <p class="card-text">
+                <i class="fas fa-heartbeat"></i>
+                <span id="show-situation">Situation : {{ user.profile.situation }}</span>
+              </p>
+              <p>
+                <i class="fas fa-map-marker-alt"></i> 
+                <span id="show-departement">Departement : {{ user.profile.departement.nom }}</span>  
+              </p>
+              
+          </div>
+      </div>
+  </div>
+</div>

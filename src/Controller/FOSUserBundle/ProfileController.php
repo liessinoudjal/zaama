@@ -70,7 +70,6 @@ class ProfileController extends BaseRegistrationController
         $formEditSituation = $this->createForm(SituationType::class, $profile);
         $formEditDescription = $this->createForm(DescriptionType::class, $profile);
         $formEditPhoto = $this->createForm(PhotoType::class, $profile);
-        dump($user);
         $breadcrumb=["index"=>"Accueil","profile"=>"Profile"];
         return $this->render('FOSUserBundle/Profile/show.html.twig', array(
             'user' => $user,"breadcrumb"=>$breadcrumb,
