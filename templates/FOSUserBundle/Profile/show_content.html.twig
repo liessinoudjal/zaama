@@ -8,7 +8,7 @@
             <span class="badge badge-pill badge-secondary">
                 {{ user.username }}
             </span>
-            <span class="float-right">Inscrit depuis le {{ user.dateInscription|date("d-M-Y") }}</span>
+            <span class="float-right">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</span>
         </h3>
     </div>
     <div class="card-body">
@@ -122,7 +122,11 @@
                     </div>
                     <div class="modal-body">
                      {{ form_start(formEditDescription, { 'attr': { 'class': 'form-profile','id' : 'form-description' } }) }}
-                       {{ form_widget(formEditDescription) }}
+                      <div class="form-Group">
+                       {{ form_label(formEditDescription.description, null,{'label': 'Votre présentation','label_attr':{} } )}}
+                       {{ form_widget(formEditDescription.description, {'attr' : {'class':'form-control'}  } ) }}
+                      </div>
+                      
                     </div>
                     <div class="modal-footer">
                       <button type="submit" data-field="description" data-profile="{{user.profile.id}}" id="btn-update-description"class="btn btn-outline-primary">Enregistrer</button>

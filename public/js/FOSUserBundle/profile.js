@@ -3,11 +3,11 @@
     $('button[id^="btn-update-"]').on("click",function(e){
       e.preventDefault();
       console.log($(this));
-      let ProfileUserId= $(this).data('profile');
-      let field = $(this).data('field');
-      let inputValue = $('#form-'+field+ ' :input').val();
+      var ProfileUserId= $(this).data('profile');
+      var field = $(this).data('field');
+      var inputValue = $('#form-'+field+ ' :input').val();
      console.log( Routing.generate('edit_profile_user', { id: ProfileUserId, field: field,inputValue : inputValue }) );
-     $.ajax({
+   /*  $.ajax({
       url: Routing.generate('edit_profile_user', { id: ProfileUserId }) ,
       type: "post",
       data : {"field": field,"inputValue" : inputValue},
@@ -24,6 +24,6 @@
       complete : function(resultat, statut){
           $('.modal#modal-'+field).modal('toggle');
       }
-    });
+    });*/
     });
   

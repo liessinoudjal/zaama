@@ -140,6 +140,7 @@ class ProfileController extends BaseRegistrationController
         
         if($request->isXmlHttpRequest())
         {
+            
              $field =  $request->request->get('field');
             $inputValue =  $request->request->get('inputValue');
             if($field==="departement")
