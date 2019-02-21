@@ -76,10 +76,11 @@ class SortieController extends AbstractController
 
             return $this->redirectToRoute('sortie_edit', ['id' => $sortie->getId()]);
         }
-
+        $breadcrumb = ["index" => "Accueil", "" => $sortie->getIntitule() ];
         return $this->render('sortie/edit.html.twig', [
             'sortie' => $sortie,
             'form' => $form->createView(),
+            'breadcrumb' => $breadcrumb
         ]);
     }
 

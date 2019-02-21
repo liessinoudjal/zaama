@@ -53,11 +53,11 @@
             <div class="col-md-3">
                 <div class="row">
                     <div class="col-md-12">
-                         {{ form_label(form.nbPersonneMax, null,{'label': 'Nombre de personnes','label_attr':{} }) }}
+                         {{ form_label(form.nbPersonneMax, null,{'label': 'Nombre de personnes max','label_attr':{} }) }}
                     </div>
                
                     <div class="col-md-4"> 
-                        {{ form_widget(form.nbPersonneMax, {'attr': {'class':'form-control'}}) }}
+                        {{ form_widget(form.nbPersonneMax, {'attr': {'class':'form-control select2'}}) }}
                     </div>
                 </div>
             </div>

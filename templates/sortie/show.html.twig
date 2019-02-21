@@ -3,8 +3,6 @@
 {% block title %}{{parent()}} - {{ sortie.intitule }}{% endblock %}
 
 
-
-
     {% block side_bar_left %}
 {{ render(controller('App\\Controller\\SideBarLeftController::index' )) }}
  
@@ -18,7 +16,7 @@
     {% if isOrganisateur(sortie, app.user) %}
         <thead>
             <tr>
-                <th colspan="2">   <a href="" class="btn btn-outline-success">modifier la sortie</a> </th>
+                <th colspan="2">   <a href="{{path('sortie_edit', { 'id': sortie.id } ) }}" class="btn btn-outline-success">modifier la sortie</a> </th>
             </tr>
         </thead>
     {% endif %}
