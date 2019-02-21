@@ -20,8 +20,8 @@ class SortieController extends AbstractController
      */
     public function index(SortieRepository $sortieRepository): Response
     {
-        $breadcrumb = ["index" => "Accueil", "sortie_index" => "sortie", ];
-        return $this->render('sortie/index.html.twig', ['sorties' => $sortieRepository->findAll(),"breadcrumb"=>$breadcrumb ]);
+      
+        return $this->render('sortie/index.html.twig', ['sorties' => $sortieRepository->getSortiesAccueil()]);
     }
 
     /**

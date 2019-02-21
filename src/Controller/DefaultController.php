@@ -13,10 +13,10 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(SortieRepository $sortieRepository)
+    public function index()
     {
         $breadcrumb=["index"=>"Accueil"];
-        return $this->render('default/index.html.twig',['sorties' => $sortieRepository->getSortiesAccueil(),"breadcrumb"=>$breadcrumb ]);
+        return $this->render('default/index.html.twig',["breadcrumb"=>$breadcrumb ]);
     }
 
     /**
