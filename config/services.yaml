@@ -49,7 +49,9 @@ services:
             $mailer: '@fos_user.mailer.default'
         tags: ['controller.service_arguments']
   
-       
+    App\Listener\ActivityListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }   
 
 
    # App\Form\FOSUserBundle\RegistrationFormType:
