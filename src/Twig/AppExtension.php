@@ -25,6 +25,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('isOrganisateur', [$this, 'isOrganisateur']),
+            new TwigFunction('isUserProfile', [$this, 'isUserProfile']),
         ];
     }
 
@@ -33,4 +34,8 @@ class AppExtension extends AbstractExtension
         return $sortie->getOrganisateur()->getId() == $user->getId();
     }
   
+    public function isUserProfile(User $userProfile, User $user) :bool
+    {
+        return $userProfile->getId() == $user->getId();
+    }
 }
