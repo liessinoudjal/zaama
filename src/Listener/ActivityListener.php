@@ -24,7 +24,7 @@ class ActivityListener
     public function onCoreController(FilterControllerEvent $event)
     {   
         $user= $this->getUser();
-
+       
         $em= $this->container->get('doctrine.orm.entity_manager');
         // ici nous vérifions que la requête est une "MASTER_REQUEST" pour que les sous-requête soit ingoré (par exemple si vous faites un render() dans votre template)
          // ou  qu'un token d'autentification est bien présent avant d'essayer manipuler l'utilisateur courant.
@@ -41,6 +41,7 @@ class ActivityListener
             // Nous vérifions que l'utilisateur est bien du bon type pour ne pas appeler getLastActivity() sur un objet autre objet User
             if ($user->getLastActivity() < $delay) {
                 $user->isActiveNow(); 
+                $em->persist($user);
                 $em->flush($user);
             }
     }

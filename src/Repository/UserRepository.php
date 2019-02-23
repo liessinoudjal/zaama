@@ -22,11 +22,15 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @return User[] Returns an array of latest User objects 
      */
-    public function findLatestsUsersConnected($value)
+    public function findLatestsUsersConnected()
     {
+        $date = (new \DateTime());
+        $date->setTimestamp(strtotime('10 minutes ago'));
+
         return $this->createQueryBuilder('u')
-            ->andWhere('u.last_activity > DATEADD(MINUTE, -10, NOW()')
-            ->orderBy('u.id', 'ASC')
+            ->Where("u.lastActivity > :date ")
+            ->setParameter('date', $date)
+            ->orderBy('u.username', 'ASC')
             ->getQuery()
             ->getResult()
         ;
