@@ -12,11 +12,12 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
  *  @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap( {"usersimple" = "UserSimple", "user" = "User"} )
+ * 
  */
  class User extends BaseUser
 {
@@ -189,7 +190,7 @@ use Doctrine\Common\Collections\ArrayCollection;
     /**
  * @return Collection|Sortie[]
  */
-public function getSorties(): Collection
+public function getSorties(): ArrayCollection
 {
     return $this->sorties;
 }
@@ -198,7 +199,7 @@ public function addSorty(Sortie $sorty): self
 {
     if (!$this->sorties->contains($sorty)) {
         $this->sorties[] = $sorty;
-        $sorty->setTypeSortie($this);
+       // $sorty->setTypeSortie($this);
     }
 
     return $this;

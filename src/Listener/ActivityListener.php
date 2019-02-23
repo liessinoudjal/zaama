@@ -3,7 +3,7 @@ namespace App\Listener;
 
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use App\Entity\User;
+use App\Entity\FOSUserBundle\User;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -24,13 +24,15 @@ class ActivityListener
     public function onCoreController(FilterControllerEvent $event)
     {   
         $user= $this->getUser();
-      // 
+
         $em= $this->container->get('doctrine.orm.entity_manager');
         // ici nous vérifions que la requête est une "MASTER_REQUEST" pour que les sous-requête soit ingoré (par exemple si vous faites un render() dans votre template)
          // ou  qu'un token d'autentification est bien présent avant d'essayer manipuler l'utilisateur courant.
         if (!$event->isMasterRequest() || $user == null ) {
             return;
         }
+        // Nous vérifions qu'un token d'autentification est bien présent avant d'essayer manipuler l'utilisateur courant.
+       
 
             // Nous utilisons un délais pendant lequel nous considèrerons que l'utilisateur est toujours actif et qu'il n'est pas nécessaire de refaire de mise à jour
             $delay = new \DateTime();
