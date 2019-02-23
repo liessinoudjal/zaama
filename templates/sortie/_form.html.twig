@@ -80,9 +80,15 @@
          </div>
            
     </div>
-
+     <div class="col-md-12">
+              
+                <div> 
+                    {{ form_widget(form.statut, {'attr': {}}) }}
+                    {{ form_label(form.statut, null,{'label': 'Publier','label_attr':{} }) }}
+                </div>
+            </div>
      {{ form_rest(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-outline-success">Enregistrer</button>
 {{ form_end(form) }}
 
 </div>

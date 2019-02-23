@@ -24,6 +24,7 @@
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
         "symfony/web-link": "*",
+        "symfony/webpack-encore-bundle": "^1.1",
         "symfony/yaml": "*",
         "tempusdominus/bootstrap-4": "^5.1",
         "twbs/bootstrap": "4.1.3",

@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class SortieType extends AbstractType
 {
@@ -59,6 +60,7 @@ class SortieType extends AbstractType
                 ],
                 'choices' => $this->KeyToValue(range(0,55,5))
             ])
+            ->add('statut',CheckboxType::class, [] )
         ;
     }
     private function KeyToValue(array $array){

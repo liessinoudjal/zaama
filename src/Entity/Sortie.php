@@ -105,13 +105,13 @@ class Sortie
     private $nbPersonneMax;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable= true)
      */
     private $statut;
 
     public function __construct()
     {
-        $this->statut= 'Actif';
+        $this->statut= false;
         $this->createdAt= new \DateTime();
         $this->setNbPersonneMax(2);
         $this->setHeure(0);
@@ -214,12 +214,12 @@ class Sortie
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getStatut(): ?bool
     {
         return $this->statut;
     }
 
-    public function setStatut(string $statut): self
+    public function setStatut(bool $statut): self
     {
         $this->statut = $statut;
 
