@@ -7,6 +7,7 @@ use App\Entity\FOSUserBundle\User as organisateur;
 use App\Entity\TypeSortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\FOSUserBundle\User;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -32,13 +33,14 @@ class SortieRepository extends ServiceEntityRepository
 //     * @return Sortie[] Returns an array of Sortie objects
 //     */
   
-    public function getSortiesAccueil()
+    public function getSortiesAccueil() : array
     {
+
         $result= $this->createQueryBuilder('s')
             ->select('s.id,o.id AS organisateur,s.nbPersonneMax AS nbPersonneMax,o.sexe AS sexe, o.username AS username,s.dateSortie, s.intitule, tp.id AS typeSortie ,s.heureSortie, SUBSTRING(s.dateSortie, 1, 4) as year, SUBSTRING(s.dateSortie, 6, 2) as month, SUBSTRING(s.dateSortie, 9, 2) as day')
             ->join('s.organisateur', 'o')
             ->join('s.typeSortie', 'tp')
-           // ->where("s.statut = 'publié'")
+            ->where("s.statut = 1")
             ->orderBy('s.dateSortie', 'ASC')
             ->AddOrderBy('s.heure', 'ASC')
             ->AddOrderBy('s.minute', 'ASC')
@@ -69,8 +71,8 @@ class SortieRepository extends ServiceEntityRepository
      ->orderBy('v.date', 'ASC')
     */
 
-    /*
-    public function findOneBySomeField($value): ?Sortie
+  
+    public function getSortiesUserDashboard(User $user): ?array
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
@@ -79,5 +81,5 @@ class SortieRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+  
 }

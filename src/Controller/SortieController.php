@@ -99,4 +99,18 @@ class SortieController extends AbstractController
 
         return $this->redirectToRoute('sortie_index');
     }
+
+    /**
+     * @Route("/sortie/dashboard", name="sortie_dashboard")
+     */
+    public function userDashboard(SortieRepository $sortieRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user= $this->getUser();
+
+        return $this->render('sortie/dashboard.html.twig', ['sorties' => $sortieRepository->getSortiesUserDashboard($user)]);
+    }
+
+
+
 }
