@@ -28,7 +28,7 @@ class UserRepository extends ServiceEntityRepository
         $date->setTimestamp(strtotime('10 minutes ago'));
 
         return $this->createQueryBuilder('u')
-            ->Where("u.lastActivity > :date ")
+            ->Where("u.lastActivity >= :date ")
             ->setParameter('date', $date)
             ->orderBy('u.username', 'ASC')
             ->getQuery()

@@ -15,6 +15,8 @@ class DefaultController extends AbstractController
      */
     public function index(SortieRepository $sortieRepository)
     {
+
+        //dd(new \DateTime('now',new \DateTimeZone('Europe/Paris')));
         $breadcrumb=["index"=>"Accueil"];
         return $this->render('default/index.html.twig',['sorties' => $sortieRepository->getSortiesAccueil(),"breadcrumb"=>$breadcrumb ]);
     }

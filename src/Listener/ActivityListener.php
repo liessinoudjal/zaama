@@ -35,9 +35,11 @@ class ActivityListener
        
 
             // Nous utilisons un délais pendant lequel nous considèrerons que l'utilisateur est toujours actif et qu'il n'est pas nécessaire de refaire de mise à jour
-            $delay = new \DateTime();
+            $delay = new \Datetime();
+            //$delay->modify("-2 minutes");
             $delay->setTimestamp(strtotime('2 minutes ago'));
-
+           // dump($user->getLastActivity() );
+           // dd($delay);
             // Nous vérifions que l'utilisateur est bien du bon type pour ne pas appeler getLastActivity() sur un objet autre objet User
             if ($user->getLastActivity() < $delay) {
                 $user->isActiveNow(); 

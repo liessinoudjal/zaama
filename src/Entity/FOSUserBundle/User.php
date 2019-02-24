@@ -75,7 +75,7 @@ use Doctrine\Common\Collections\ArrayCollection;
     public function __construct()
     {
         parent::__construct();
-        $this->dateInscription= new \DateTime();
+        $this->dateInscription= new \DateTime('now',new \DateTimeZone('Europe/Paris'));
         $this->sorties = new ArrayCollection();
     }
     
