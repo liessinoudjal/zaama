@@ -373,8 +373,8 @@ class Sortie
      */
     public function isNotDateAnterieur():bool
     {
-        $dateSortie= new \DateTime($this->getDateSortie()->format('Y-m-d').' '.$this->getHeureSortie().':00');
-        $now= new \Datetime();
+        $dateSortie= new \DateTime($this->getDateSortie()->format('Y-m-d').' '.$this->getHeureSortie().':00', new \DateTimeZone('Europe/Paris'));
+        $now= new \Datetime('now', new \DateTimeZone('Europe/Paris'));
        // dump($dateSortie);dd($now);
         return $dateSortie >= $now ;
     }
