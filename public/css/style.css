@@ -2,9 +2,9 @@ body{
     font: bold 16px sans-serif;
 }
 .navbar-brand
-{font-family:  'Cookie', cursive;
+{
 	color:  #ffffff;
-	font: normal 36px 'Cookie', cursive;
+	font: normal 36px 'Rock Salt', cursive;
 
 }
 
@@ -26,34 +26,41 @@ body{
     min-width: 253px;
 }
 .content-main{
-    min-width:450px;
+    min-width:570px;
+}
+.side-bar{
+    width : 285px;
 }
 
 .pseudo-H{
-    font-family:  'Cookie', cursive;
-    font-size: 18px;
+    font-family:  'Bevan', cursive;
+    font-size: 16px;
     font-weight: bold;
-    color : rgb(29, 41, 212);
+    color : rgb(81, 91, 221);
+    letter-spacing: 1px;
 }
 .pseudo-F{
-    font-family:  'Cookie', cursive;
-    font-size: 18px;
+    font-family:  'Bevan', cursive;
+    font-size: 16px;
     font-weight: bold;
     color :rgb(231, 81, 106);
+    letter-spacing: 1px;
 }
 
 .badge-H{
-    font-family:  'Cookie', cursive;
-    font-size: 22px;
+    font-family:  'Bevan', cursive;
+    font-size: 20px;
     font-weight: bold;
     color : white;
-    background-color :rgb(29, 41, 212);
+    background-color :rgb(81, 91, 221);
+    letter-spacing: 1px;
 }
 
 .badge-F{
-    font-family:  'Cookie', cursive;
-    font-size: 22px;
+    font-family:  'Bevan', cursive;
+    font-size: 20px;
     font-weight: bold;
     color : white;
     background-color :rgb(231, 81, 106);
+    letter-spacing: 1px;
 }

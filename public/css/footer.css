@@ -21,7 +21,7 @@
 
 .footer-distributed h3{
 	color:  #ffffff;
-	font: normal 36px 'Cookie', cursive;
+	font: normal 36px 'Rock Salt', cursive;
 	margin: 0 0 10px;
 }
 
@@ -173,12 +173,14 @@
 
 	.footer-distributed{
 		padding: 30px;
+			max-width: 100%;
+			min-width: 500x;
 	}
 
 	.footer-distributed .footer-left,
 	.footer-distributed .footer-right{
 		float: none;
-		max-width: 300px;
+	
 		margin: 0 auto;
 	}
 
