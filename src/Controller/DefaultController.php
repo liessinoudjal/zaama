@@ -41,4 +41,23 @@ class DefaultController extends AbstractController
         $breadcrumb=["index"=>"Accueil",""=>"Profile ".$user->getUsername()];
         return $this->render('default/show_profile.html.twig',compact("breadcrumb","user"));
     }
+
+      /**
+     * @Route("/logintest", name="logintest")
+     */
+    public function logintest()
+    {
+
+     
+        return $this->render('login.html.twig');
+    }
+     /**
+     * @Route("/pricingtest", name="logintest")
+     */
+    public function pricingtest()
+    {
+
+     
+        return $this->render('princing_table.html.twig');
+    }
 }

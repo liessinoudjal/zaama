@@ -331,7 +331,7 @@ class Sortie
     {
         if(intval($number) < 10 )
             $number = "0".$number;
-            return $number;
+            return (string) $number;
     }
 
     /**

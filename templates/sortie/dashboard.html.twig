@@ -1,53 +1,19 @@
-<div class="accordion" id="accordionExample2">
-     <div class="card">
-          <div class="card-header" id="headingTwo">
-               <h5 class="mb-0">
-               <button class="btn btn-link " type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    Collapsible Group Item #2   
-              {% if app.user %}
-               </button> <a class="btn btn-outline-secondary btn-sm "href="{{ path('sortie_new') }}">Créer sortie <i class="fa fa-plus" aria-hidden="true"></i></a>
-               {% endif %}
-               </h5> 
-          </div>
-    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample2">
-      <div class="card-body">
-        <table class="table table-hover" style="text-align: center;">
-          <thead>
-         
-          </thead>
-          <tbody>
+{% extends 'base.html.twig' %}
 
-           {% for year in sorties %}
-             <tr>
-                      <th scope="col">Date</th>
-                    <th scope="col">intitulé</th>
-                    <th scope="col">Participants</th>
-                      <th scope="col">Organisateur</th>
-          
-                </tr>
-              {% for mois,jours in year %}
-                  <tr class="table-primary"><th colspan="4" >{{mois}} </th></tr>  
-                      {% for jour,sorties in jours %}
-                        <tr align="left"  class="table-light"><th colspan="4" >{{jour}}</th></tr>
-                              {% for sortie in sorties %}
-                                <tr >
-                                    <th >{{sortie.heureSortie}}</th>
-                                    <td><a href="{{ path('sortie_show', {'id': sortie.id}) }}">{{sortie.intitule}}</a></td>
-                                    <td>{{'1/'~ sortie.nbPersonneMax}}</td>
-                                    <td ><a class="pseudo-{{sortie.sexe}}" href="{{ path('default_show_profile', {'id': sortie.organisateur}) }}">{{sortie.username}}</a></td>
-                                </tr>
-                              {% endfor %}
-                        
-                      {% endfor %}
-              {% endfor %}
-         {% else %}
-            <tr>
-                <td colspan="2">Aucune sortie</td>
-            </tr>
-        {% endfor %}
-          </tbody>
-     </table> 
-      </div>
-    </div>
-  </div>
-</div>
+{% block title %}Nouvelle sortie{% endblock %}
+
+{% block body %}
+<i class="fas fa-tachometer-alt fa-5x"></i>
+
+{% for sortie in sorties %}
+  {{sortie.organisateur ~ " " ~ sortie.intitule}}
+
+{% else %}
+  pas de sortie
+{% endfor %}
+   
+{% endblock %}
+
+{% block javascripts %}
+     <script src="{{ asset('js/datepicker.js') }}"></script>
+{% endblock javascripts %}

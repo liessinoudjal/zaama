@@ -53,7 +53,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sortie_show", methods="GET")
+     * @Route("/{id}", name="sortie_show", methods="GET", requirements={"id"="\d+"})
      */
     public function show(Sortie $sortie): Response
     {
@@ -101,14 +101,17 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/sortie/dashboard", name="sortie_dashboard")
+     * @Route("/dashboard", name="sortie_dashboard")
      */
     public function userDashboard(SortieRepository $sortieRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user= $this->getUser();
-
-        return $this->render('sortie/dashboard.html.twig', ['sorties' => $sortieRepository->getSortiesUserDashboard($user)]);
+            $breadcrumb = ["index" => "Accueil", "" => 'Mon dashboard' ];
+        return $this->render('sortie/dashboard.html.twig', [
+            'sorties' => $sortieRepository->getSortiesUserDashboard($user),
+            'breadcrumb' => $breadcrumb,
+            ]);
     }
 
 
