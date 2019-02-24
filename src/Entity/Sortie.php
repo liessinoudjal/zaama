@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SortieRepository")
@@ -122,6 +123,26 @@ class Sortie
     {
         return empty($this->getIntitule())? "Sortie": "Sortie : ". $this->getIntitule();
     }
+
+     /**
+     * @Assert\Callback
+    */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if (!$this->isnotDateAnterieur() ) {
+            $context->buildViolation('La date de sortie ne dois pas être dans le passée.')
+                ->atPath('dateSortie')
+                ->addViolation();
+        }
+     /*   if(!preg_match("((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})",$this->getPlainPassword())){
+            $context->buildViolation('Votre mot de passe doit contenir au moins 8 caractères alpha numeriques (chiffre + minuscule + majuscule)')
+            ->atPath('plainPassword')
+            ->addViolation();
+        }*/
+        //plainPassword  ((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -202,7 +223,7 @@ class Sortie
         return $this;
     }
 
-    public function getNbPersonneMax(): ?int
+    public function getNbPersonneMax(): int
     {
         return $this->nbPersonneMax;
     }
@@ -214,7 +235,7 @@ class Sortie
         return $this;
     }
 
-    public function getStatut(): ?bool
+    public function getStatut(): bool
     {
         return $this->statut;
     }
@@ -248,9 +269,9 @@ class Sortie
      *
      * @return  self
      */ 
-    public function setDateSortie($dateSortie)
+    public function setDateSortie(\DateTime $dateSortie)
     {
-        $this->dateSortie = $dateSortie;
+        $this->dateSortie = new \DateTime($dateSortie->format('Y-m-d').' '.$this->getHeureSortie().':00');
 
         return $this;
     }
@@ -344,5 +365,29 @@ class Sortie
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     * verifie si la date de sortie n'est pas dans le passé
+     * @return boolean 
+     */
+    public function isNotDateAnterieur():bool
+    {
+        $dateSortie= new \DateTime($this->getDateSortie()->format('Y-m-d').' '.$this->getHeureSortie().':00');
+        $now= new \Datetime();
+       // dump($dateSortie);dd($now);
+        return $dateSortie >= $now ;
+    }
+
+    /**
+     * verifie si la sortie est modifiable, on ne peut plus modifier une sortie passée, on met son statut à false
+     */
+    public function isModifiable():bool
+    {
+        if($this->isNotDateAnterieur())
+            return true;
+
+            return false;
+      
     }
 }

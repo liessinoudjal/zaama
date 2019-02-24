@@ -6,7 +6,8 @@
                 {{ form_label(form.dateSortie, 'Date de votre sortie', {'label_attr': {}}) }}
                 <div>
                     {{ form_widget(form.dateSortie, {'attr': {'class': 'form-control date-sortie'}}) }}
-                </div>           
+                </div>
+                 <span class="badge badge-pill badge-danger">{{ form_errors(form.dateSortie) }}</span>           
             </div>
              <div class="col-md-3">
                 <div class="row">

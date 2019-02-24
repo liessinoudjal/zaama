@@ -13,7 +13,7 @@
     <h1>Sortie</h1>
 
     <table class="table"  style="text-align: center;">
-    {% if isOrganisateur(sortie, app.user) %}
+    {% if ( (isOrganisateur(sortie, app.user) and sortie.isModifiable )or is_granted('ROLE_ADMIN') ) %}
         <thead>
             <tr>
                 <th colspan="2">   <a href="{{path('sortie_edit', { 'id': sortie.id } ) }}" class="btn btn-outline-success">modifier la sortie</a> </th>
