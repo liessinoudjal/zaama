@@ -21,7 +21,7 @@
         <!-- js-->
          <script src="{{ asset('build/js/jquery.js') }}"></script>
          <script type="text/javascript" src="{{asset('build/js/moment.js')}}"></script>
-   
+
          {% block stylesheets %}
           
         {% endblock %}   
@@ -112,9 +112,9 @@
     <ol class="breadcrumb">
     {% for path,name in breadcrumb %}
       {% if path is empty %}
-        <li class="breadcrumb-item ">{{name}}</li>
+        <li class="breadcrumb-item ">{{name|raw}}</li>
       {% else %}
-        <li class="breadcrumb-item "><a href="{{path(path)}}">{{name}}</a></li>
+        <li class="breadcrumb-item "><a href="{{path(path)}}">{{name }}</a></li>
       {% endif %}
      {% endfor %}
     </ol>

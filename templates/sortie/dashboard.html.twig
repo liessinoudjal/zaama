@@ -1,17 +1,100 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle sortie{% endblock %}
+{% block title %}{{parent()}} - Dashboard{% endblock %}
 
 {% block body %}
-<i class="fas fa-tachometer-alt fa-5x"></i>
+
+<section class="jumbotron">
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active show" data-toggle="tab" data-target="#sorties">Mes sorties</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" data-target="#profile1">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" data-target="#">Disabled</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mes sorties</a>
+    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
+      <a class="dropdown-item" href="#">brouillons</a>
+      <a class="dropdown-item" href="#">publiées</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active show" id="sorties">
+    <div class="row">
+    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h4 class="card-title">Primary card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h4 class="card-title">Secondary card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h4 class="card-title">Success card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h4 class="card-title">Danger card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h4 class="card-title">Warning card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+        <div class="card-header">Mes sorties brouillon</div>
+        <div class="card-body">
+          <h4 class="card-title">Info card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+</div>
+
+    <div class="tab-pane fade show" id="profile1">
+      <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+    </div>
+    <div class="tab-pane fade" id="dropdown1">
+      <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+    </div>
+    <div class="tab-pane fade" id="dropdown2">
+      <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
+    </div>
+  
+</div>
 
 {% for sortie in sorties %}
   {{sortie.organisateur ~ " " ~ sortie.intitule}}
 
 {% else %}
   pas de sortie
-{% endfor %}
-   
+{% endfor %}   
+</section>
+
 {% endblock %}
 
 {% block javascripts %}

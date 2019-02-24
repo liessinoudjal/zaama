@@ -107,7 +107,7 @@ class SortieController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user= $this->getUser();
-            $breadcrumb = ["index" => "Accueil", "" => 'Mon dashboard' ];
+            $breadcrumb = ["index" => "Accueil", "" => 'Mon dashboard <i class="fas fa-tachometer-alt"></i>' ];
         return $this->render('sortie/dashboard.html.twig', [
             'sorties' => $sortieRepository->getSortiesUserDashboard($user),
             'breadcrumb' => $breadcrumb,
