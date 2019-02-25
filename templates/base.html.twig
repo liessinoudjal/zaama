@@ -7,10 +7,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('build/css/bootswatch.css') }}">
+       <!-- <link rel="stylesheet" href="{{ asset('build/css/bootswatch.css') }}"> -->
+         <link rel="stylesheet" href="{{ asset('build/css/bootswatch-united.css') }}">
         <link rel="stylesheet" href="{{ asset('build/css/custom.min.css') }}">
         <link rel="stylesheet" href="{{ asset('build/css/bootstrap-datepicker3.min.css') }}">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+       <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" /> -->
+        <link rel="stylesheet" href="{{ asset('build/css/select2.css') }}">
 
 
               <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -20,8 +22,6 @@
 
         <!-- js-->
          <script src="{{ asset('build/js/jquery.js') }}"></script>
-         <script type="text/javascript" src="{{asset('build/js/moment.js')}}"></script>
-
          {% block stylesheets %}
           
         {% endblock %}   
@@ -138,15 +138,19 @@
 
 {{ include('_footer.html.twig') }}
 
+         <script type="text/javascript" src="{{asset('build/js/moment.js')}}"></script>
+
  <script src="{{ asset('build/js/popper.js') }}"></script>
     <script src="{{ asset('build/js/bootstrap.js') }}"></script>
     <script src="{{ asset('build/js/custom.js') }}"></script>
      <!-- <script src="{{ asset('build/js/moment.js') }}"></script> -->
     <script src="{{ asset('build/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('build/js/bootstrap-datepicker.fr.min.js') }}"></script>
+   <!-- <script src="{{ asset('build/js/bootstrap-datepicker.fr.min.js') }}"></script> -->
     <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.js"></script> -->
+<script src="{{ asset('build/js/select2.full.js') }}"></script> 
+
 {% block javascripts %}{% endblock %}
 </body>
 </html>
