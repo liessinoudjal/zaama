@@ -74,6 +74,7 @@ class SortieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'mapped' => true,
             'data_class' => Sortie::class,
         ]);
     }

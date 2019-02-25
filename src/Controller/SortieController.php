@@ -58,7 +58,7 @@ class SortieController extends AbstractController
     public function show(Sortie $sortie): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER','Sortie','Vous devez être connecté pour acceder au détail de cette sortie');
-
+        
         $breadcrumb = ["index" => "Accueil", "" => $sortie->getIntitule(), ];
         return $this->render('sortie/show.html.twig', ['sortie' => $sortie,"breadcrumb" => $breadcrumb]);
     }
@@ -71,7 +71,7 @@ class SortieController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
-
+       // dd($sortie);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 

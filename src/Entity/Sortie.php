@@ -303,7 +303,7 @@ class Sortie
      */ 
     public function getMinute() :?string
     {
-        return $this->formatTimeTwoChars($this->minute);
+        return $this->minute;
     }
 
     /**
@@ -323,7 +323,7 @@ class Sortie
      */ 
     public function getHeure() : ?string
     {
-        return $this->formatTimeTwoChars($this->heure);
+        return $this->heure;
     }
 
     /**
@@ -345,7 +345,7 @@ class Sortie
     }
 
     public function setHeureSortie($heure = null){
-        $this->heureSortie = $this->getHeure().":".$this->getMinute();
+        $this->heureSortie = $this->formatTimeTwoChars($this->heure).":".$this->formatTimeTwoChars($this->minute);
     }
 
     private function formatTimeTwoChars(?int $number) : string
