@@ -60,7 +60,9 @@ class SortieType extends AbstractType
                 ],
                 'choices' => $this->KeyToValue(range(0,55,5))
             ])
-            ->add('statut',CheckboxType::class, [] )
+            ->add('statut',CheckboxType::class, [
+                "required"=>false,
+            ] )
         ;
     }
     private function KeyToValue(array $array){

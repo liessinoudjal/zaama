@@ -82,12 +82,12 @@
            
     </div>
      <div class="col-md-12">
-              
-                <div> 
-                    {{ form_widget(form.statut, {'attr': {}}) }}
-                    {{ form_label(form.statut, null,{'label': 'Publier','label_attr':{} }) }}
+                <div class="custom-control custom-switch"> 
+                    {{ form_widget(form.statut, {'attr': {'class':'custom-control-input'}}) }}
+                    {{ form_label(form.statut, null,{'label': 'Publier','label_attr':{'class':'custom-control-label'} }) }}
                 </div>
             </div>
+            {{form_errors(form.statut) }}
      {{ form_rest(form) }}
     <button class="btn btn-outline-success">Enregistrer</button>
 {{ form_end(form) }}
