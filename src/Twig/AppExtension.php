@@ -52,7 +52,7 @@ class AppExtension extends AbstractExtension
         $sortie = $this->repo->find($idSortie);
         $dateSortie= new \DateTime($sortie->getDateSortie()->format('Y-m-d').' '.$sortie->getHeureSortie().':00', new \DateTimeZone('Europe/Paris'));
         $now= new \Datetime('now', new \DateTimeZone('Europe/Paris'));
-       // dump($dateSortie);dd($now);
+        //dump($dateSortie);dd($now);
         return $dateSortie >= $now ;
         //return $sortie->isModifiable();
     }

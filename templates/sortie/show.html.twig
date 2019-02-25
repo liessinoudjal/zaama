@@ -13,7 +13,7 @@
     <h1>Sortie</h1>
 
     <table class="table"  style="text-align: center;">
-    {% if ( (isOrganisateur(sortie, app.user) and sortie.isModifiable )or is_granted('ROLE_ADMIN') ) %}
+    {% if ( (isOrganisateur(sortie, app.user) and isSortieModifiable(sortie.id) or is_granted('ROLE_ADMIN') ) ) %}
         <thead>
             <tr>
                 <th colspan="2">   <a href="{{path('sortie_edit', { 'id': sortie.id } ) }}" class="btn btn-outline-success">modifier la sortie</a> </th>
@@ -52,6 +52,10 @@
             <tr>
                 <th>Statut</th>
                 <td>{{ sortie.statut }}</td>
+            </tr>
+             <tr>
+                <th>date sortie</th>
+                <td>{{ sortie.dateSortie| date() }}</td>
             </tr>
         </tbody>
     </table>

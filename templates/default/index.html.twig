@@ -42,7 +42,7 @@
                       {% for jour,sorties in jours %}
                         <tr align="left"  class="table-light"><th colspan="4" >{{jour}}</th></tr>
                               {% for sortie in sorties %}
-                                <tr {% if not isSortieModifiable(sortie.id) %}class="table-warning" {% endif %} >
+                                <tr {% if not isSortieModifiable(sortie.id) %}class="table-secondary" {% else %} class="table-success" {% endif %} >
                                     <th >{{sortie.heureSortie}}</th>
                                     <td><a href="{{ path('sortie_show', {'id': sortie.id}) }}">{{sortie.intitule}}</a></td>
                                     <td>{{'1/'~ sortie.nbPersonneMax}}</td>

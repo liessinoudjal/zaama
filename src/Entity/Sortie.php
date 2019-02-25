@@ -271,7 +271,7 @@ class Sortie
      */ 
     public function setDateSortie(\DateTime $dateSortie)
     {
-        $this->dateSortie = new \DateTime($dateSortie->format('Y-m-d').' '.$this->getHeureSortie().':00');
+        $this->dateSortie = $dateSortie;
 
         return $this;
     }
@@ -341,7 +341,7 @@ class Sortie
     public function getHeureSortie() :string
     {
             $this->setHeureSortie();
-            return $this->heureSortie;
+            return (string) $this->heureSortie;
     }
 
     public function setHeureSortie($heure = null){
@@ -373,10 +373,10 @@ class Sortie
      */
     public function isNotDateAnterieur():bool
     {
-        $dateSortie= new \DateTime($this->getDateSortie()->format('Y-m-d').' '.$this->getHeureSortie().':00', new \DateTimeZone('Europe/Paris'));
+        $dateSortie= new \DateTime($this->getDateSortie()->format('Y-m-d').' '.$this->getHeureSortie().':00');
         $now= new \Datetime('now', new \DateTimeZone('Europe/Paris'));
        // dump($dateSortie);dd($now);
-        return $dateSortie >= $now ;
+        return $dateSortie > $now ;
     }
 
     /**
