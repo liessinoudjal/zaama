@@ -1,7 +1,9 @@
 {% extends 'main.html.twig' %}
 
 {% block title %}{{parent()}} - {{ sortie.intitule }}{% endblock %}
-
+  {% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    {% endblock stylesheets %} 
 
     {% block side_bar_left %}
 {{ render(controller('App\\Controller\\SideBarLeftController::index' )) }}
@@ -10,60 +12,75 @@
 
 {% block content_main %}
 
-    <h1>Sortie</h1>
-
-    <table class="table"  style="text-align: center;">
-    {% if ( (isOrganisateur(sortie, app.user) and isSortieModifiable(sortie.id) or is_granted('ROLE_ADMIN') ) ) %}
-        <thead>
-            <tr>
-                <th colspan="2">   <a href="{{path('sortie_edit', { 'id': sortie.id } ) }}" class="btn btn-outline-success">modifier la sortie</a> </th>
-            </tr>
-        </thead>
-    {% endif %}
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ sortie.id }}</td>
-            </tr>
-            <tr>
-                <th>Portable</th>
-                <td>{{ sortie.portable }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ sortie.photo }}</td>
-            </tr>
-            <tr>
-                <th>OpenTo</th>
-                <td>{{ sortie.presentation }}</td>
-            </tr>
-            <tr>
-                <th>Intitule</th>
-                <td>{{ sortie.intitule }}</td>
-            </tr>
-            <tr>
-                <th>EntreFille</th>
-                <td>{{ sortie.entreFille ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>NbPersonneMax</th>
-                <td>{{ sortie.nbPersonneMax }}</td>
-            </tr>
-            <tr>
-                <th>Statut</th>
-                <td>{{ sortie.statut }}</td>
-            </tr>
-             <tr>
-                <th>date sortie</th>
-                <td>{{ sortie.dateSortie| date() }}</td>
-            </tr>
-        </tbody>
-    </table>
-<a href="{{ path('sortie_index') }}">back to list</a>
-
-    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">edit</a>
-
-    {{ include('sortie/_delete_form.html.twig') }}
+    <h1>{{sortie.intitule}}</h1>
+    {% if ( ((isOrganisateur(sortie, app.user) and isSortieModifiable(sortie.id)) or is_granted('ROLE_ADMIN') ) ) %}
+    <div class="col-md-2">
+        
+                <a  href="{{path('sortie_edit', { 'id': sortie.id } ) }}" class="btn btn-outline-success btn-sm">modifier la sortie</a> 
+       
+    </div>
+     {% endif %}
+    <div class="container emp-profile">
+            
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="profile-img">
+                            {% if sortie.organisateur.profile.photo %}
+                            <img src="{{asset('uploads/profilePhoto/'~ sortie.organisateur.profile.photo)}}" alt=""/>
+                            {% else %}
+                            <img src="{{asset('uploads/profilePhoto/Default2-'~ sortie.organisateur.sexe ~'.jpg')}}" alt=""/>
+                            {% endif %} 
+                            <a class="pseudo-{{sortie.organisateur.sexe}}"  href="{{path('default_show_profile',{'id': sortie.organisateur.id } ) }}">{{sortie.organisateur.username}}</a>
+                            <p>{{sortie.portable ? "Tel : "~ sortie.portable }}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                       {{sortie.dateSortie|localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y') }} à {{sortie.heureSortie}}
+                                    </h5>
+                                    <h6>{{sortie.typeSortie}}</h6>
+                                    <p class="profile-rating">Inscrits : <span>8/{{sortie.nbPersonneMax}} </span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="home-tab2" data-toggle="tab" tada-target="#home2" role="tab" aria-controls="home" aria-selected="true">Présentation</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="profile-work">
+                            <p>Participants</p>
+                            <a href="">Website Link</a><br/>
+                            <a href="">Bootsnipp Profile</a><br/>
+                            <a href="">Bootply Profile</a>
+                            <p>Liste d'attente</p>
+                            <a href="">Web Designer</a><br/>
+                            <a href="">Web Developer</a><br/>
+                            <a href="">WordPress</a><br/>
+                            <a href="">WooCommerce</a><br/>
+                            <a href="">PHP, .Net</a><br/>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="jumbotron">
+                        {{sortie.Presentation|nl2br}}
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="home-tab2" data-toggle="tab" tada-target="#home2" role="tab" aria-controls="home" aria-selected="true">Commentaires</a>
+                                </li>
+                            </ul>
+                <div class="jumbotron row">
+                
+                </div>          
+        </div>
 
 {% endblock content_main %}
 

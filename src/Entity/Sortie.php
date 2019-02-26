@@ -91,7 +91,7 @@ class Sortie
     private $typeSortie;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $entreFille;
 
@@ -106,7 +106,7 @@ class Sortie
     private $nbPersonneMax;
 
     /**
-     * @ORM\Column(type="boolean", nullable= true)
+     * @ORM\Column(type="string", nullable= true)
      */
     private $statut;
 
@@ -211,12 +211,12 @@ class Sortie
         return $this;
     }
 
-    public function getEntreFille(): ?bool
+    public function getEntreFille(): ?string
     {
         return $this->entreFille;
     }
 
-    public function setEntreFille(?bool $entreFille): self
+    public function setEntreFille(?string $entreFille): self
     {
         $this->entreFille = $entreFille;
 
@@ -235,12 +235,12 @@ class Sortie
         return $this;
     }
 
-    public function getStatut(): bool
+    public function getStatut(): string
     {
         return $this->statut;
     }
 
-    public function setStatut(bool $statut): self
+    public function setStatut(string $statut): self
     {
         $this->statut = $statut;
 

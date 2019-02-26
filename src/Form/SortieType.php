@@ -34,13 +34,13 @@ class SortieType extends AbstractType
             ->add('portable')
             //->add('photo')
             ->add('intitule')
-            ->add('entreFille')
+            ->add('entreFille',ChoiceType::class, [
+                "required"=>true,
+                'choices' => ["Non" => "Non","Oui" => "Oui"]
+            ])
             ->add('presentation', TextareaType::class)
-            ->add('nbPersonneMax', IntegerType::class, [
-                'attr' => [
-                    'min' => 2,
-                    'max' => 20
-                ]
+            ->add('nbPersonneMax', ChoiceType::class, [
+                'choices' => $this->KeyToValue(range(2,20))
             ])
             ->add('typeSortie', EntityType::class, [
                 'class' => TypeSortie::class,
@@ -60,8 +60,9 @@ class SortieType extends AbstractType
                 ],
                 'choices' => $this->KeyToValue(range(0,55,5))
             ])
-            ->add('statut',CheckboxType::class, [
-                "required"=>false,
+            ->add('statut',ChoiceType::class, [
+                "required"=>true,
+                'choices' => ["Publier" => "Publier","Brouillon" => "Brouillon","Annuler" => "Annuler"]
             ] )
         ;
     }

@@ -41,7 +41,7 @@ class SortieController extends AbstractController
             $sortie->setHeureSortie();
             $em->persist($sortie);
             $em->flush();
-            $this->addFlash('success', 'Sortie créee et publiée');
+            $this->addFlash('success', 'Sortie créee');
             return $this->redirectToRoute('index');
         }
         $breadcrumb = ["index" => "Accueil", "sortie_new" => "nouvelle sortie", ];
@@ -64,7 +64,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="sortie_edit", methods="GET|POST")
+     * @Route("/{id}/edit", name="sortie_edit", methods="GET|POST", requirements={"id"="\d+"})
      */
     public function edit(Request $request, Sortie $sortie): Response
     {
@@ -74,8 +74,8 @@ class SortieController extends AbstractController
        // dd($sortie);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('sortie_edit', ['id' => $sortie->getId()]);
+            $this->addFlash('success', 'Sortie modifiée');
+            return $this->redirectToRoute('sortie_show', ['id' => $sortie->getId()]);
         }
         $breadcrumb = ["index" => "Accueil", "" => $sortie->getIntitule() ];
         return $this->render('sortie/edit.html.twig', [

@@ -40,7 +40,7 @@ class SortieRepository extends ServiceEntityRepository
             ->select('s.id,o.id AS organisateur,s.nbPersonneMax AS nbPersonneMax,o.sexe AS sexe, o.username AS username,s.dateSortie, s.intitule, tp.id AS typeSortie ,s.heureSortie, SUBSTRING(s.dateSortie, 1, 4) as year, SUBSTRING(s.dateSortie, 6, 2) as month, SUBSTRING(s.dateSortie, 9, 2) as day')
             ->join('s.organisateur', 'o')
             ->join('s.typeSortie', 'tp')
-            ->where("s.statut = 1")
+            ->where("s.statut = 'Publier' ")
             ->orderBy('s.dateSortie', 'ASC')
             ->AddOrderBy('s.heure', 'ASC')
             ->AddOrderBy('s.minute', 'ASC')

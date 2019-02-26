@@ -1,6 +1,6 @@
 {% extends "layout.html.twig" %}
     {% block stylesheets %}
-    
+     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
     {% endblock stylesheets %}  
 
 
@@ -8,6 +8,10 @@
 <div class="jumbotron">
 {% include "Default/show_profile_content.html.twig" %}
 </div>
+
+{% include "Default/show_profile_content2.html.twig" %}
+
+
 
 {% endblock fos_user_content %}
 

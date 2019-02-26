@@ -46,9 +46,9 @@
         </div>
          <div class="row">
              <div class="col-md-3">
-              {{ form_label(form.entreFille, null,{'label': 'Sortie entre fille ?','label_attr':{} }) }}
+              {{ form_label(form.entreFille, null,{'label': 'Sortie réservée aux femmes ?','label_attr':{} }) }}
                 <div> 
-                    {{ form_widget(form.entreFille, {'attr': {'class':'form-control'}}) }}
+                    {{ form_widget(form.entreFille, {'attr': {'class':'form-control select2'}}) }}
                 </div>
             </div>
             <div class="col-md-3">
@@ -82,9 +82,14 @@
            
     </div>
      <div class="col-md-12">
-                <div class="custom-control custom-switch"> 
-                    {{ form_widget(form.statut, {'attr': {'class':'custom-control-input'}}) }}
-                    {{ form_label(form.statut, null,{'label': 'Publier','label_attr':{'class':'custom-control-label'} }) }}
+                <div class="form-group">  
+                 <div class="col-md-2">
+                     {{ form_label(form.statut, null,{'label': 'Statut','label_attr':{'class':''} }) }}
+                     <div>
+                        {{ form_widget(form.statut, {'attr': {'class':'form-control select2'}}) }}
+                     </div>
+                   
+                   </div>
                 </div>
             </div>
             {{form_errors(form.statut) }}

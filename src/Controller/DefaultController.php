@@ -31,7 +31,7 @@ class DefaultController extends AbstractController
     }
 
       /**
-     * @Route("/show/profile/{id}", name="default_show_profile")
+     * @Route("/show/profile/{id}", name="default_show_profile", requirements={"id"="\d+"})
      */
     public function showProfile(User $user)
     {
