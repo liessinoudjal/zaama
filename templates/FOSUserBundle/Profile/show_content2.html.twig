@@ -1,0 +1,204 @@
+<div class="jumbotron emp-profil">
+        
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-center">
+                             {% if user.profile.photo %}
+                                <img style="max-height:250px;"  id="photo_profil" src="{{asset('uploads/profilePhoto/'~ user.profile.photo)}}" alt="photo de profil">
+                            {% else %}
+                                <img style="max-height: 200px;min-height: 115px;max-width:438px;min-width:250px;"  id="photo_profil" src="{{asset('uploads/profilePhoto/Default2-'~ user.sexe ~'.jpg')}}" alt="photo de profil">
+                            {% endif %} 
+                                 <button data-toggle="modal" data-target="#modal-photo" data-backdrop="static" class="btn btn-outline-warning " title="Modifier ma photo"><i class="fas fa-edit"></i></button>
+                        </p>
+                        <p class="text-center">
+                            <a class="btn btn-outline-warning btn-sm" href="{{path('change_password')}}"><i class="fas fa-unlock-alt"></i> modifier mon mot de passe</a>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        <span class="pseudo-{{user.sexe}}">
+                                            {{ user.username }}
+                                        </span>
+                                    </h5>
+                                     {% if user.isHomme %}
+                                    <p class="card-text"><i class="fas fa-male"></i> {{ user.prenom }}</p>
+                                    {% else %}
+                                    <p class="card-text"><i class="fas fa-female"></i> {{ user.prenom }}</p>
+                                    {% endif %}
+                                    <h6>
+                                         <span class="">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</span>
+                                    </h6>
+                                     <p class="card-text"><i class="fas fa-at"></i> {{ user.email }}</p>
+                                    <p><i class="fas fa-birthday-cake"></i> {{user.dateBirth|localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y')}} ({{user.age}} ans)</p>
+                                    
+                                                            <p class="card-text">
+                                        <i class="fas fa-heartbeat"></i>
+                                    Situation : <span id="show-situation"> {{ user.profile.situation }}</span>
+                                        <button data-toggle="modal" data-target="#modal-situation" data-backdrop="static" class="btn btn-outline-warning float-right" title="Modifier ma situation"><i class="fas fa-edit"></i></button>
+                                    </p>
+                                    </br>
+                                    <p>
+                                        <i class="fas fa-map-marker-alt"></i> 
+                                        Departement :<span id="show-departement"> {{ user.profile.departement.nom }}</span>  
+                                        <button data-toggle="modal" data-target="#modal-departement" data-backdrop="static" class="btn btn-outline-warning float-right" title="Modifier mon département"><i class="fas fa-edit"></i></button>
+                                    </p>
+                                    </br>
+                                    <p>
+                                     <i class="fab fa-teamspeak"></i> Description 
+                                    <button data-toggle="modal" data-target="#modal-description" data-backdrop="static" class="btn btn-outline-warning float-right" title="Modifier ma description"><i class="fas fa-edit"></i></button>
+                                
+                                    </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">  
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="profile-work">
+                            <p>WORK LINK</p>
+                            <a href="">Website Link</a><br/>
+                            <a href="">Bootsnipp Profile</a><br/>
+                            <a href="">Bootply Profile</a>
+                            <p>SKILLS</p>
+                            <a href="">Web Designer</a><br/>
+                            <a href="">Web Developer</a><br/>
+                            <a href="">WordPress</a><br/>
+                            <a href="">WooCommerce</a><br/>
+                            <a href="">PHP, .Net</a><br/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="profile-work">
+                            <p>WORK LINK</p>
+                            <a href="">Website Link</a><br/>
+                            <a href="">Bootsnipp Profile</a><br/>
+                            <a href="">Bootply Profile</a>
+                            <p>SKILLS</p>
+                            <a href="">Web Designer</a><br/>
+                            <a href="">Web Developer</a><br/>
+                            <a href="">WordPress</a><br/>
+                            <a href="">WooCommerce</a><br/>
+                            <a href="">PHP, .Net</a><br/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab2">
+                                        <p class="card-text">
+                <p></p> 
+                <p><span id="show-description">{{ user.profile.description |nl2br  }}</span><p>
+                
+              </p>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>          
+        </div>
+
+        <!-- modal departement-->
+              <div class="modal" id="modal-departement">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Département</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formEditDepartement, { 'attr': { 'class': 'form-profile','id' : 'form-departement' } }) }}
+                     <div class="form-group row">
+                      <div class="col-md-4">
+                          {{ form_widget(formEditDepartement.departement  ,  { 'attr' : {'class':'form-control select2'} } ) }}
+                      </div>
+                     
+                     </div>
+                      
+                    </div>
+                    <div class="modal-footer">
+                  
+                      <button type="submit" data-field="departement" data-profile="{{user.profile.id}}" id="btn-update-departement"class="btn btn-outline-primary">Enregistrer</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                    {{ form_end(formEditDepartement) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- endmodal --> 
+ <!-- modal situation-->
+              <div class="modal" id="modal-situation">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Situation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formEditSituation, { 'attr': { 'class': 'form-profile','id' : 'form-situation' } }) }}
+                       {{ form_widget(formEditSituation.situation ,  { 'attr' : {'class':'form-control select2'}   }  ) }}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" data-field="situation" data-profile="{{user.profile.id}}" id="btn-update-situation"class="btn btn-outline-primary">Enregistrer</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                    {{ form_end(formEditSituation) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- endmodal --> 
+<!-- modal description-->
+              <div class="modal" id="modal-description">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Description</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formEditDescription, { 'attr': { 'class': 'form-profile','id' : 'form-description' } }) }}
+                      <div class="form-Group">
+                       {{ form_label(formEditDescription.description, null,{'label': 'Votre présentation','label_attr':{} } )}}
+                       {{ form_widget(formEditDescription.description, {'attr' : {'class':'form-control'}  } ) }}
+                      </div>
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" data-field="description" data-profile="{{user.profile.id}}" id="btn-update-description"class="btn btn-outline-primary">Enregistrer</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                    {{ form_end(formEditDescription) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- endmodal --> 
+ <!-- modal photo-->
+              <div class="modal" id="modal-photo">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modifier ma photo</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formEditPhoto, { 'action': path('edit_profile_photo_user',{id: user.id}) , 'attr': { 'class': 'form-profile','id' : 'form-photo' } }) }}
+                       {{ form_widget(formEditPhoto) }}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" data-field="photo" data-profile="{{user.profile.id}}" id="btn-update"class="btn btn-outline-primary">Modifier</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+                    {{ form_end(formEditPhoto) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+<!-- endmodal --> 

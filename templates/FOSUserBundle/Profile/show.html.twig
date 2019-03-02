@@ -1,14 +1,14 @@
 {% extends "layout.html.twig" %}
-    {% block stylesheets %}
-    
-    {% endblock stylesheets %}  
+     {% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    {% endblock stylesheets %} 
 
 
 {% block fos_user_content %}
-<div class="jumbotron">
+{#<div class="jumbotron">
 {% include "FOSUserBundle/Profile/show_content.html.twig" %}
-</div>
-
+</div>#}
+{% include "FOSUserBundle/Profile/show_content2.html.twig" %}
 {% endblock fos_user_content %}
 
  {% block javascripts %}

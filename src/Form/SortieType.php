@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class SortieType extends AbstractType
 {
@@ -38,7 +39,11 @@ class SortieType extends AbstractType
                 "required"=>true,
                 'choices' => ["Non" => "Non","Oui" => "Oui"]
             ])
-            ->add('presentation', TextareaType::class)
+            ->add('presentation', CKEditorType::class,[
+                'config' => [
+                            'uiColor' => '#ffffff'
+                            ]
+            ])
             ->add('nbPersonneMax', ChoiceType::class, [
                 'choices' => $this->KeyToValue(range(2,20))
             ])
