@@ -40,9 +40,7 @@ class SortieType extends AbstractType
                 'choices' => ["Non" => "Non","Oui" => "Oui"]
             ])
             ->add('presentation', CKEditorType::class,[
-                'config' => [
-                            'uiColor' => '#ffffff'
-                            ]
+                'config' => array('toolbar' => 'my_toolbar_1'),
             ])
             ->add('nbPersonneMax', ChoiceType::class, [
                 'choices' => $this->KeyToValue(range(2,20))

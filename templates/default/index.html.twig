@@ -15,7 +15,7 @@
           <div class="card-header" id="headingTwo">
                <h5 class="mb-0">
                <button class="btn btn-link " type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    Collapsible Group Item #2   
+                    Sorties   
               {% if app.user %}
                </button> <a class="btn btn-outline-success btn-sm "href="{{ path('sortie_new') }}">Créer sortie <i class="fa fa-plus" aria-hidden="true"></i></a>
                {% endif %}
@@ -31,20 +31,21 @@
 
            {% for year in sorties %}
              <tr>
-                      <th scope="col">Date</th>
-                    <th scope="col">intitulé</th>
+                      <th colspan="2" scope="col">Date</th>
+                    <th colspan="3" scope="col">intitulé</th>
                     <th scope="col">Participants</th>
                       <th scope="col">Organisateur</th>
           
                 </tr>
               {% for mois,jours in year %}
-                  <tr class="table-primary"><th colspan="4" >{{mois}} </th></tr>  
+                  <tr class="table-primary"><th colspan="7" >{{mois}} </th></tr>  
                       {% for jour,sorties in jours %}
-                        <tr align="left"  class="table-light"><th colspan="4" >{{jour}}</th></tr>
+                        <tr align="left"  class="table-light"><th colspan="7" >{{jour}}</th></tr>
                               {% for sortie in sorties %}
-                                <tr {% if not isSortieModifiable(sortie.id) %}class="table-secondary" {% else %} class="table-success" {% endif %} >
+                                <tr {% if not isSortieModifiable(sortie.id) %}class="table-secondary" {% else %} class="" {% endif %} >
+                                <td>&nbsp;</td>
                                     <th >{{sortie.heureSortie}}</th>
-                                    <td><a href="{{ path('sortie_show', {'id': sortie.id}) }}">{{sortie.intitule}}</a></td>
+                                    <td colspan="3" ><a href="{{ path('sortie_show', {'id': sortie.id}) }}">{{sortie.intitule}}</a></td>
                                     <td>{{'1/'~ sortie.nbPersonneMax}}</td>
                                     <td ><a class="pseudo-{{sortie.sexe}}" href="{{ path('default_show_profile', {'id': sortie.organisateur}) }}">{{sortie.username}}</a></td>
                                 </tr>

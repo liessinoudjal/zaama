@@ -26,51 +26,59 @@
                     <div class="col-md-5">
                         <div class="profile-img">
                             {% if sortie.organisateur.profile.photo %}
-                            <img src="{{asset('uploads/profilePhoto/'~ sortie.organisateur.profile.photo)}}" alt=""/>
+                            <img style="max-height:250px;" src="{{asset('uploads/profilePhoto/'~ sortie.organisateur.profile.photo)}}" alt=""/>
                             {% else %}
-                            <img src="{{asset('uploads/profilePhoto/Default2-'~ sortie.organisateur.sexe ~'.jpg')}}" alt=""/>
+                            <img style="max-height:250px;" src="{{asset('uploads/profilePhoto/Default2-'~ sortie.organisateur.sexe ~'.jpg')}}" alt=""/>
                             {% endif %} 
                             <a class="pseudo-{{sortie.organisateur.sexe}}"  href="{{path('default_show_profile',{'id': sortie.organisateur.id } ) }}">{{sortie.organisateur.username}}</a>
                             <p>{{sortie.portable ? "Tel : "~ sortie.portable }}</p>
                             
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="profile-head">
                                     <h5>
                                        {{sortie.dateSortie|localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y') }} à {{sortie.heureSortie}}
                                     </h5>
                                     <h6>{{sortie.typeSortie}}</h6>
                                     <p class="profile-rating">Inscrits : <span>8/{{sortie.nbPersonneMax}} </span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link" id="home-tab2" data-toggle="tab" tada-target="#home2" role="tab" aria-controls="home" aria-selected="true">Présentation</a>
-                                </li>
-                            </ul>
+                           
                         </div>
                     </div>
                     
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="profile-work">
-                            <p>Participants</p>
+                    
+                    <div class="col-md-12">
+                     <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="home-tab2" data-toggle="tab" tada-target="#home2" role="tab" aria-controls="home" aria-selected="true">Présentation</a>
+                                </li>
+                            </ul>
+                        <div class="jumbotron">
+                        {{sortie.Presentation|raw}} {#nl2br#}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                       
+                            <h5>Participants</h5>
                             <a href="">Website Link</a><br/>
                             <a href="">Bootsnipp Profile</a><br/>
                             <a href="">Bootply Profile</a>
-                            <p>Liste d'attente</p>
+                      </div>  
+                      <div class="col-md-6">
+                      <h5>Liste d'attente</h5>
                             <a href="">Web Designer</a><br/>
                             <a href="">Web Developer</a><br/>
                             <a href="">WordPress</a><br/>
                             <a href="">WooCommerce</a><br/>
                             <a href="">PHP, .Net</a><br/>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="jumbotron">
-                        {{sortie.Presentation|raw}} {#nl2br#}
-                        </div>
-                    </div>
+                      </div>
+                            
+                       
+                    
                 </div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">

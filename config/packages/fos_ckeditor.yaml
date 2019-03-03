@@ -1,4 +1,25 @@
 # Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+fos_ck_editor:
+    configs:
+       my_config_1:
+            toolbar: "my_toolbar_1"
+            uiColor: "lightgrey"
+    toolbars:
+        configs:
+            my_toolbar_1: ["@styles", "@colors","@basic_styles","@clipboard","@document","@paragraph","@insert" ]
+        items:
+            about: ["About"]
+            document: ['Print']
+            link:     ['Link', 'Unlink', 'Anchor']
+            tool:     [ "Maximize", 'ShowBlocks' ]
+            basic_styles: ['Bold','Italic','Underline','RemoveFormat']
+            clipboard: [ 'Undo', 'Redo']
+            colors: ['TextColor', 'BGColor']
+            editing: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']
+            forms: ['Form','Checkbox','Radio','TextField','Textarea','SelectField','Button','ImageButton','HiddenField',] 
+            insert: ['Smiley']
+            paragraph: ['NumberedList','BulletedList','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight']
+            styles: ['Format', 'Font', 'FontSize']
 
 twig:
     form_themes:
