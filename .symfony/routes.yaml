@@ -1,0 +1,2 @@
+"https://{default}/": { type: upstream, upstream: "za3ma:http" }
+"http://{default}/": { type: redirect, to: "https://{default}/" }
