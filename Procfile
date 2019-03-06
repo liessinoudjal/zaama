@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 -C php_custom.ini public/
+web: vendor/bin/heroku-php-apache2 -F php_custom.conf public/
