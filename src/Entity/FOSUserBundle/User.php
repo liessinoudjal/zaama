@@ -29,20 +29,20 @@ use Doctrine\Common\Collections\ArrayCollection;
     */
     protected $id;
     /**
-     *  @ORM\Column(name="sexe",type="string", nullable=false)
+     *  @ORM\Column(name="sexe",type="string", nullable=true)
     *  @Assert\NotBlank()
     */
     protected $sexe;
 
     /**
-     *  @ORM\Column(name="prenom",type="string", nullable=false)
+     *  @ORM\Column(name="prenom",type="string", nullable=true)
     *  @Assert\NotBlank()
     */
     protected $prenom;
 
     
     /**
-     *  @ORM\Column(name="date_birth",type="datetime", nullable=false)
+     *  @ORM\Column(name="date_birth",type="datetime", nullable=true)
     *  @Assert\NotBlank()
     *  @Assert\DateTime()
     */
@@ -55,7 +55,7 @@ use Doctrine\Common\Collections\ArrayCollection;
     protected $profile;
 
     /**
-     *  @ORM\Column(name="date_inscription",type="datetime", nullable=false)
+     *  @ORM\Column(name="date_inscription",type="datetime", nullable=true)
     *  @Assert\NotBlank()
     *  @Assert\DateTime()
     */
