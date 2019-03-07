@@ -52,7 +52,7 @@ class RegistrationFormType extends BaseType
                 'help' => 'Au moins 8 caractères alpha numeriques (chiffre + minuscule + majuscule)',
             ))
         ;
-        dump($builder);
+      //  dump($builder);
     }
 
     public function getParent()
