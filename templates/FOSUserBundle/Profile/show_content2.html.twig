@@ -27,10 +27,11 @@
                                     <p class="card-text"><i class="fas fa-female"></i> {{ user.prenom }}</p>
                                     {% endif %}
                                     <h6>
-                                         <span class="">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</span>
+                                         <!--<span class="">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</span> -->
+                                         <span class="">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|date( 'd-M-Y') }}</span>
                                     </h6>
                                      <p class="card-text"><i class="fas fa-at"></i> {{ user.email }}</p>
-                                    <p><i class="fas fa-birthday-cake"></i> {{user.dateBirth|localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y')}} ({{user.age}} ans)</p>
+                                    <p><i class="fas fa-birthday-cake"></i> {{user.dateBirth|date( 'd-M-Y')}} ({{user.age}} ans)</p>
                                     
                                                             <p class="card-text">
                                         <i class="fas fa-heartbeat"></i>
