@@ -11,7 +11,8 @@
               {% if isUserProfile(user, app.user) %}
                 <a href="{{path('profile') }}" class="btn btn-outline-success">Modifier mon profile</a>
               {% endif %}
-            <span class="float-right">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|localizeddate('none', 'none', null, null, 'dd MMMM ') }}</span>
+          <!--  <span class="float-right">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|localizeddate('none', 'none', null, null, 'dd MMMM ') }}</span> -->
+          <span class="float-right">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|date( 'dd-MM-YYYY') }}</span>
         </h3>
     </div>
     <div class="card-body">
