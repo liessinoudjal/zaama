@@ -9,6 +9,7 @@
         "friendsofsymfony/ckeditor-bundle": "^2.0",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "friendsofsymfony/user-bundle": "~2.0",
+        "heroku/heroku-buildpack-php": "^151.0",
         "sensio/framework-extra-bundle": "^5.1",
         "sensiolabs/security-checker": "^5.0",
         "symfony/apache-pack": "^1.0",

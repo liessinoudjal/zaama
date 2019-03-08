@@ -137,6 +137,9 @@
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
     },
+    "heroku/heroku-buildpack-php": {
+        "version": "v151"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
