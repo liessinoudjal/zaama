@@ -12,7 +12,7 @@
                 <a href="{{path('profile') }}" class="btn btn-outline-success">Modifier mon profile</a>
               {% endif %}
           <!--  <span class="float-right">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|localizeddate('none', 'none', null, null, 'dd MMMM ') }}</span> -->
-          <span class="float-right">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|date( 'dd-MM-YYYY') }}</span>
+          <span class="float-right">Inscrit{{user.sexe == "F"?"e":""}} depuis le {{ user.dateInscription|date( 'd-M-Y') }}</span>
         </h3>
     </div>
     <div class="card-body">
@@ -42,7 +42,9 @@
               {% else %}
                <p class="card-text"><i class="fas fa-female"></i> {{ user.prenom }}</p>
               {% endif %}
-              <p><i class="fas fa-birthday-cake"></i> {{user.dateBirth|localizeddate('none', 'none', null, null, 'EEEE dd MMMM')}} ({{user.age}} ans)</p>
+             <!-- <p><i class="fas fa-birthday-cake"></i> {{user.dateBirth|localizeddate('none', 'none', null, null, 'EEEE dd MMMM')}} ({{user.age}} ans)</p> -->
+             <p><i class="fas fa-birthday-cake"></i> {{user.dateBirth|date('d-M-Y')}} ({{user.age}} ans)</p>
+             
             
           </div>
           <div class="col-md-6">
