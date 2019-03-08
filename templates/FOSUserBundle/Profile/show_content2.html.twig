@@ -4,7 +4,7 @@
                     <div class="col-md-6">
                         <p class="text-center">
                              {% if user.profile.photo %}
-                                <img style="max-height:250px;"  id="photo_profil" src="{{asset('uploads/profilePhoto/'~ user.profile.photo)}}" alt="photo de profil">
+                                <img style="max-height: 200px;min-height: 115px;max-width:438px;min-width:250px;" id="photo_profil" src="{{asset('uploads/profilePhoto/'~ user.profile.photo)}}" alt="photo de profil">
                             {% else %}
                                 <img style="max-height: 200px;min-height: 115px;max-width:438px;min-width:250px;"  id="photo_profil" src="{{asset('uploads/profilePhoto/Default2-'~ user.sexe ~'.jpg')}}" alt="photo de profil">
                             {% endif %} 
