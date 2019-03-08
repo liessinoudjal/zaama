@@ -18,7 +18,7 @@ class DefaultController extends AbstractController
 
     
         $breadcrumb=["index"=>"Accueil"];
-        return $this->render('default/index.html.twig',['sorties' => $sortieRepository->getSortiesAccueil(),"breadcrumb"=>$breadcrumb ]);
+        return $this->render('Default/index.html.twig',['sorties' => $sortieRepository->getSortiesAccueil(),"breadcrumb"=>$breadcrumb ]);
     }
 
     /**
@@ -27,7 +27,7 @@ class DefaultController extends AbstractController
     public function pulse()
     {
         $breadcrumb=["index"=>"Accueil","pulse"=>"pulse"];
-        return $this->render('default/pulse.html.twig',compact("breadcrumb"));
+        return $this->render('Default/pulse.html.twig',compact("breadcrumb"));
     }
 
       /**
@@ -39,7 +39,7 @@ class DefaultController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         $breadcrumb=["index"=>"Accueil",""=>"Profile ".$user->getUsername()];
-        return $this->render('default/show_profile.html.twig',compact("breadcrumb","user"));
+        return $this->render('Default/show_profile.html.twig',compact("breadcrumb","user"));
     }
 
       /**
