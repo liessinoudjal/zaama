@@ -1,4 +1,5 @@
 swiftmailer:
     url: '%env(MAILER_URL)%'
     spool: { type: 'memory' }
+    host : email-smtp.eu-west-1.amazonaws.com
  
