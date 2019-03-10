@@ -23,14 +23,13 @@ body{
     padding:10px 20px;
 }
 .side-bar{
-    min-width: 253px;
-}
-.content-main{
-    //min-width:570px;
-}
-.side-bar{
+    /*min-width: 253px;*/
     width : 285px;
 }
+.content-main{
+    /*min-width:570px;*/
+}
+
 
 .pseudo-H{
     font-family:  'Bevan', cursive;
