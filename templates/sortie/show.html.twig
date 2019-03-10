@@ -16,8 +16,8 @@
             {% if ( ((isOrganisateur(sortie, app.user) and isSortieModifiable(sortie.id)) or is_granted('ROLE_ADMIN') ) ) %}
             <div class="float-right">
                 <a  href="{{path('sortie_edit', { 'id': sortie.id } ) }}" class="btn btn-outline-success btn-sm">modifier la sortie</a> 
-            </div></h1>
-            {% endif %}
+            </div>
+            {% endif %}</h1>
      </div>
     <div class="container emp-profile">
                 <div class="row" >
@@ -88,22 +88,37 @@
                       </div>
                      
                 </div>    
-                <p>
-                    Commentaires
-                    <button data-toggle="modal" data-target="#modal-commentaire" data-backdrop="static" class="btn btn-outline-success" title="Ajouter un commenataire">Ajouter un commentaire <i class="fa fa-plus" aria-hidden="true"></i></button>  
-                </p>
-                <div class="jumbotron">
+                <div class="row mt-2">
+                    <div class="col-sm-2">
+                           <p>Commentaires</p>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="float-right">
+                        <button data-toggle="modal" data-target="#modal-commentaire" data-backdrop="static" class="btn btn-outline-success btn-sm" title="Ajouter un commenataire">Ajouter un commentaire <i class="fa fa-plus" aria-hidden="true"></i></button>  
+                        </div>
+                    </div>
+                    
+                </div>
+            
                     {%  for commentaire in commentaires  %}
-                            <div class="card border-light mb-10" style="width:100%;">
-                                <div class="card-header">{{commentaire.auteur}} </div>
-                                <div class="card-body">{{ commentaire.date|date('d-m-Y H:i', "Europe/Paris")}}</div>
+                            <div class="card border-light mb-3 " style="width:100%;">
+                                <div class="card-header">
+                                
+                                         <p class="mb-0">{{commentaire.auteur ~" "~ commentaire.date|date('d-m-Y H:i', "Europe/Paris")}}</p> 
+                                    
+                                </div>
                                 <h4 class="card-title"></h4>
-                                <p class="card-text">{{commentaire.comment|raw}}</p>
+                                <div class="card-body px-4">
+                                     
+                                      <p class="card-text ">{{commentaire.comment|raw}}</p>
+                                </div>
+                                
+                              
                             </div>
                     {% else %}
                         Aucun commentaire posté.
                     {% endfor %}
-                </div> 
+             
                 <!-- modal commentaire-->
                 <div class="modal" id="modal-commentaire">
                         <div class="modal-dialog modal-lg" role="document">
