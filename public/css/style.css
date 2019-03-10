@@ -64,5 +64,25 @@ body{
     background-color :rgb(231, 81, 106);
     letter-spacing: 1px;
 }
+@media (max-width: 800px) {
+    .table{
+        max-width: 400px;
+        font-size: 12px;
+    }
 
+    .pseudo-H{
+        font-family:  'Bevan', cursive;
+        font-size: 14px;
+        font-weight: bold;
+        color : rgb(81, 91, 221);
+        letter-spacing: 1px;
+    }
+    .pseudo-F{
+        font-family:  'Bevan', cursive;
+        font-size: 14px;
+        font-weight: bold;
+        color :rgb(231, 81, 106);
+        letter-spacing: 1px;
+    }
 
+}
