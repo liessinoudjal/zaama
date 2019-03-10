@@ -26,7 +26,7 @@ body{
     min-width: 253px;
 }
 .content-main{
-    min-width:570px;
+    //min-width:570px;
 }
 .side-bar{
     width : 285px;
@@ -75,14 +75,14 @@ body{
         font-size: 14px;
         font-weight: bold;
         color : rgb(81, 91, 221);
-        letter-spacing: 1px;
+        letter-spacing: unset;
     }
     .pseudo-F{
         font-family:  'Bevan', cursive;
         font-size: 14px;
         font-weight: bold;
         color :rgb(231, 81, 106);
-        letter-spacing: 1px;
+        letter-spacing: unset;
     }
 
 }
