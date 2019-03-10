@@ -22,11 +22,16 @@
      {% endif %}
     <div class="container emp-profile">
             
-                <div class="row">
+                <div class="row" >
                     <div class="col-md-5">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="home-tab2" data-toggle="tab" tada-target="#home2" role="tab" aria-controls="home" aria-selected="true">Organisateur</a>
+                                </li>
+                            </ul>
                         <div class="profile-img">
                             {% if sortie.organisateur.profile.photo %}
-                            <img style="max-height:250px;" src="{{asset('uploads/profilePhoto/'~ sortie.organisateur.profile.photo)}}" alt=""/>
+                            <img style="max-height:400px;max-width=300px;" src="{{asset('uploads/profilePhoto/'~ sortie.organisateur.profile.photo)}}" alt=""/>
                             {% else %}
                             <img style="max-height:250px;" src="{{asset('uploads/profilePhoto/Default2-'~ sortie.organisateur.sexe ~'.jpg')}}" alt=""/>
                             {% endif %} 
@@ -36,6 +41,11 @@
                         </div>
                     </div>
                     <div class="col-md-7">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="home-tab2" data-toggle="tab" tada-target="#home2" role="tab" aria-controls="home" aria-selected="true">Détails</a>
+                                </li>
+                            </ul>
                         <div class="profile-head">
                                     <h5>
                                        {{sortie.dateSortie|localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y') }} à {{sortie.heureSortie}}
@@ -60,23 +70,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-4">
                        
                             <h5>Participants</h5>
                             <a href="">Website Link</a><br/>
                             <a href="">Bootsnipp Profile</a><br/>
                             <a href="">Bootply Profile</a>
                       </div>  
-                      <div class="col-md-6">
-                      <h5>Liste d'attente</h5>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
+                      <div class="col-md-4">
+                        <h5>Liste d'attente</h5>
+                                <a href="">Web Designer</a><br/>
+                                <a href="">Web Developer</a><br/>
+                                <a href="">WordPress</a><br/>
+                                <a href="">WooCommerce</a><br/>
+                                <a href="">PHP, .Net</a><br/>
                       </div>
-                            
+                      <div class="col-md-4">
+                            <h5>Lieu RDV</h5>
+                             {{sortie.lieuRdv| nl2br }}
+
+                      </div>
+                     
+                </div>    
                        
                     
                 </div>
