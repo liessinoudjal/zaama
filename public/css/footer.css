@@ -174,7 +174,7 @@
 	.footer-distributed{
 		padding: 30px;
 			max-width: 100%;
-			min-width: 540px;
+			/*min-width: 540px;*/
 	}
 
 	.footer-distributed .footer-left,
