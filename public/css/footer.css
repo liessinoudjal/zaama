@@ -175,7 +175,7 @@
 		padding: 30px;
 		margin-top : 20px;
 		width: 100%;
-		//min-width: 540px;
+		min-width: 540px;
 	}
 
 	.footer-distributed .footer-left,
