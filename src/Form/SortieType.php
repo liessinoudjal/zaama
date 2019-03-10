@@ -67,6 +67,9 @@ class SortieType extends AbstractType
                 "required"=>true,
                 'choices' => ["Publier" => "Publier","Brouillon" => "Brouillon","Annuler" => "Annuler"]
             ] )
+            ->add('lieuRdv',TextareaType::class, [
+                "required"=>true
+            ] )
         ;
     }
     private function KeyToValue(array $array){

@@ -109,6 +109,10 @@ class Sortie
      * @ORM\Column(type="string", nullable= true)
      */
     private $statut;
+        /**
+     * @ORM\Column(type="string", nullable= true)
+     */
+    private $lieuRdv;
 
     public function __construct()
     {
@@ -389,5 +393,25 @@ class Sortie
 
             return false;
       
+    }
+
+    /**
+     * Get the value of lieuRdv
+     */ 
+    public function getLieuRdv(): ?string
+    {
+        return $this->lieuRdv;
+    }
+
+    /**
+     * Set the value of lieuRdv
+     *
+     * @return  self
+     */ 
+    public function setLieuRdv( string $lieuRdv)
+    {
+        $this->lieuRdv = $lieuRdv;
+
+        return $this;
     }
 }
