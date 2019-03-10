@@ -11,17 +11,15 @@
 {% endblock side_bar_left %}
 
 {% block content_main %}
-
-    <h1>{{sortie.intitule}}</h1>
-    {% if ( ((isOrganisateur(sortie, app.user) and isSortieModifiable(sortie.id)) or is_granted('ROLE_ADMIN') ) ) %}
-    <div class="col-md-2">
-        
+    <div class="container">
+            <h1>{{sortie.intitule}}
+            {% if ( ((isOrganisateur(sortie, app.user) and isSortieModifiable(sortie.id)) or is_granted('ROLE_ADMIN') ) ) %}
+            <div class="float-right">
                 <a  href="{{path('sortie_edit', { 'id': sortie.id } ) }}" class="btn btn-outline-success btn-sm">modifier la sortie</a> 
-       
-    </div>
-     {% endif %}
+            </div></h1>
+            {% endif %}
+     </div>
     <div class="container emp-profile">
-            
                 <div class="row" >
                     <div class="col-md-5">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -58,16 +56,13 @@
                     
                 </div>
                 <div class="row">
-                    
                     <div class="col-md-12">
-                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link" id="home-tab2" data-toggle="tab" tada-target="#home2" role="tab" aria-controls="home" aria-selected="true">Présentation</a>
-                                </li>
-                            </ul>
-                        <div class="jumbotron">
+                     <p>
+                        Présentation
+                    </p>
+                    <div class="jumbotron">
                         {{sortie.Presentation|raw}} {#nl2br#}
-                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="row" style="text-align: center;">
@@ -96,15 +91,48 @@
                        
                     
                 </div>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link" id="home-tab2" data-toggle="tab" tada-target="#home2" role="tab" aria-controls="home" aria-selected="true">Commentaires</a>
-                                </li>
-                            </ul>
+                <p>
+                    Commentaires
+                    <button data-toggle="modal" data-target="#modal-commentaire" data-backdrop="static" class="btn btn-outline-success" title="Ajouter un commenataire">Ajouter un commentaire <i class="fa fa-plus" aria-hidden="true"></i></button>  
+                </p>
                 <div class="jumbotron row">
-                
+                {%  for commentaire in commentaires  %}
+                        <div class="card border-light mb-10" style="width:100%;">
+                            <div class="card-header">{{commentaire.auteur}} </div>
+                            <div class="card-body">{{ commentaire.date|date('d-m-Y H:i', "Europe/Paris")}}
+                            <h4 class="card-title"></h4>
+                            <p class="card-text">{{commentaire.comment|raw}}</p>
+                        </div>
+          
+                {% else %}
+                    Aucun commentaire posté.
+                {% endfor %}
                 </div>          
         </div>
+
+         <!-- modal commentaire-->
+              <div class="modal" id="modal-commentaire">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ajouter un commentaire</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     {{ form_start(formCommentaire, { 'action': path('sortie_add_commentaire',{id: sortie.id}) , 'attr': { 'class': '' } }) }}
+                       {{ form_widget(formCommentaire.comment ,{  'attr': { 'class': 'form-control'} }) }}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit"  class="btn btn-outline-primary">Ajouter</button>
+                      <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                    {{ form_end(formCommentaire) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+<!-- endmodal --> 
 
 {% endblock content_main %}
 

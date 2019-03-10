@@ -34,6 +34,11 @@ class Commentaire
      */
     private $auteur;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $comment;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +76,26 @@ class Commentaire
     public function setAuteur(?User $auteur): self
     {
         $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of comment
+     */ 
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set the value of comment
+     *
+     * @return  self
+     */ 
+    public function setComment(string $comment)
+    {
+        $this->comment = $comment;
 
         return $this;
     }

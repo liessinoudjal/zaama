@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\CommentaireType;
+use App\Entity\Commentaire;
 
 /**
  * @Route("/sortie")
@@ -53,14 +55,19 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sortie_show", methods="GET", requirements={"id"="\d+"})
+     * @Route("/{id}", name="sortie_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Sortie $sortie): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER','Sortie','Vous devez être connecté pour acceder au détail de cette sortie');
-        
+        $commentaire= new Commentaire();
+        $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
+
+    
+        $commentaires=$sortie->getCommentaires();
+       // dd($commentaires);
         $breadcrumb = ["index" => "Accueil", "" => $sortie->getIntitule(), ];
-        return $this->render('sortie/show.html.twig', ['sortie' => $sortie,"breadcrumb" => $breadcrumb]);
+        return $this->render('sortie/show.html.twig', ['sortie' => $sortie,"breadcrumb" => $breadcrumb,"formCommentaire"=>$formCommentaire->createView(),"commentaires"=>$commentaires]);
     }
 
     /**
@@ -86,7 +93,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sortie_delete", methods="DELETE")
+     * @Route("/delete/{id}", name="sortie_delete", methods="DELETE")
      */
     public function delete(Request $request, Sortie $sortie): Response
     {
@@ -113,7 +120,29 @@ class SortieController extends AbstractController
             'breadcrumb' => $breadcrumb,
             ]);
     }
+     /**
+     * @Route("/add/commenaire/{id}", name="sortie_add_commentaire", methods={"POST"}, requirements={"id"="\d+"})
+     */
+    public function addCommentaire(Sortie $sortie, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER','Sortie','Vous devez être connecté pour acceder au détail de cette sortie');
+        $commentaire= new Commentaire();
+        $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
+        $formCommentaire->handleRequest($request);
 
+        if ($formCommentaire->isSubmitted() && $formCommentaire->isValid()) {
+            //dd($sortie);
+            $em = $this->getDoctrine()->getManager();
+            $commentaire->setDate(new \DateTime());
+            $commentaire->setAuteur($this->getUser());
+            $sortie->addCommentaire($commentaire);
+            $em->persist($sortie);
+            $em->flush();
+            $this->addFlash('success', 'Commentaire ajouté');
+
+        }
+        return $this->redirectToRoute('sortie_show', ['id' => $sortie->getId()]);
+    }
 
 
 }

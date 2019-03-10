@@ -115,7 +115,7 @@ class Sortie
     private $lieuRdv;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="sortie", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="sortie", orphanRemoval=true, cascade={"persist"})
      */
     private $commentaires;
 
