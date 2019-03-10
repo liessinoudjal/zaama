@@ -44,7 +44,7 @@
                               {% for sortie in sorties %}
                                 <tr {% if not isSortieModifiable(sortie.id) %}class="table-secondary" {% else %} class="" {% endif %} >
                                 <td>&nbsp;</td>
-                                    <th >{{sortie.heureSortie}}</th>
+                                    <th style= "font-weight: lighter;">{{sortie.heureSortie}}</th>
                                     <td colspan="3" ><a href="{{ path('sortie_show', {'id': sortie.id}) }}">{{sortie.intitule}}</a></td>
                                     <td>{{'1/'~ sortie.nbPersonneMax}}</td>
                                     <td ><a class="pseudo-{{sortie.sexe}}" href="{{ path('default_show_profile', {'id': sortie.organisateur}) }}">{{sortie.username}}</a></td>
