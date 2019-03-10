@@ -44,6 +44,11 @@ class Profile
      * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank(message="Veuillez selectionner une photo.")
      * @Assert\File(mimeTypes={ "image/jpeg" ,"image/bmp","image/gif","image/png"})
+     * @Assert\Image(
+     *     allowLandscape = false,
+     *     allowPortrait = true,
+     *  allowLandscapeMessage="Image payase interdite ({{ width }}x{{ height }}px).Préférez une image portrait."
+     * )
      */
     private $photo;
 
