@@ -114,6 +114,11 @@ class Sortie
      */
     private $lieuRdv;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="sortie", orphanRemoval=true)
+     */
+    private $commentaires;
+
     public function __construct()
     {
         $this->statut= false;
@@ -121,6 +126,7 @@ class Sortie
         $this->setNbPersonneMax(2);
         $this->setHeure(0);
         $this->setMinute(0);
+        $this->commentaires = new ArrayCollection();
     }
 
     public function __toString()
@@ -241,7 +247,7 @@ class Sortie
 
     public function getStatut(): string
     {
-        return $this->statut;
+        return (string) $this->statut;
     }
 
     public function setStatut(string $statut): self
@@ -411,6 +417,37 @@ class Sortie
     public function setLieuRdv( string $lieuRdv)
     {
         $this->lieuRdv = $lieuRdv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setSortie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->contains($commentaire)) {
+            $this->commentaires->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getSortie() === $this) {
+                $commentaire->setSortie(null);
+            }
+        }
 
         return $this;
     }

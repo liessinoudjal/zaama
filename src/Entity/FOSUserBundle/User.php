@@ -3,8 +3,10 @@
 
 namespace App\Entity\FOSUserBundle;
 
+use App\Entity\Commentaire;
 use App\Entity\Profile;
 use App\Entity\Sortie;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,226 +22,263 @@ use Doctrine\Common\Collections\ArrayCollection;
  * 
  */
  class User extends BaseUser
-{
+                     {
+                     
+                         /**
+                          * @ORM\Id
+                         * @ORM\Column(type="integer")
+                         * @ORM\GeneratedValue(strategy="AUTO")
+                         */
+                         protected $id;
+                         /**
+                          *  @ORM\Column(name="sexe",type="string", nullable=true)
+                         *  @Assert\NotBlank()
+                         */
+                         protected $sexe;
+                     
+                         /**
+                          *  @ORM\Column(name="prenom",type="string", nullable=true)
+                         *  @Assert\NotBlank()
+                         */
+                         protected $prenom;
+                     
+                         
+                         /**
+                          *  @ORM\Column(name="date_birth",type="datetime", nullable=true)
+                         *  @Assert\NotBlank()
+                         *  @Assert\DateTime()
+                         */
+                         protected $dateBirth;
+                     
+                         /**
+                          * @ORM\OneToOne(targetEntity="App\Entity\Profile", cascade={"persist"})
+                         * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
+                         */
+                         protected $profile;
+                     
+                         /**
+                          *  @ORM\Column(name="date_inscription",type="datetime", nullable=true)
+                         *  @Assert\NotBlank()
+                         *  @Assert\DateTime()
+                         */
+                         protected $dateInscription;
+                     
+                         /**
+                          * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
+                          */
+                         private $sorties;
+                     
+                         /**
+                         *  @ORM\Column(name="last_activity",type="datetime", nullable=true)
+                         *  @Assert\DateTime()
+                         */
+                         protected $lastActivity;
+            
+                         /**
+                          * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="auteur", orphanRemoval=true)
+                          */
+                         private $commentaires;
+                     
+                         public function __construct()
+                         {
+                             parent::__construct();
+                             $this->dateInscription= new \DateTime('now',new \DateTimeZone('Europe/Paris'));
+                             $this->sorties = new ArrayCollection();
+                             $this->commentaires = new ArrayCollection();
+                         }
+                         
+                         /**
+                          * @return \DateTime
+                         */
+                         public function getDateInscription()
+                         {
+                             return $this->dateInscription;
+                         }
+                     
+                         public function getSexe()
+                         {
+                             return $this->sexe;
+                         }
+                     
+                         public function setSexe(string $sexe)
+                         {
+                             $this->sexe = $sexe;
+                     
+                             return $this;
+                         }
+                         /**
+                          * @return boolean
+                         */
+                         public function isHomme(){
+                             return $this->sexe === "H";
+                         }
+                     
+                         /**
+                          * @return string
+                         */
+                         public function getPrenom()
+                         {
+                             return $this->prenom;
+                         }
+                         /**
+                          * @param string
+                         */
+                         public function setPrenom(string $prenom)
+                         {
+                             $this->prenom = $prenom;
+                     
+                             return $this;
+                         }
+                     
+                     
+                         /**
+                          * Get the value of dateBirth
+                         */ 
+                         public function getDateBirth()
+                         {
+                             return $this->dateBirth;
+                         }
+                     
+                         /**
+                          * Set the value of dateBirth
+                         *
+                         * @return  self
+                         */ 
+                         public function setDateBirth($dateBirth)
+                         {
+                             $this->dateBirth = $dateBirth;
+                             return $this;
+                         }
+                     
+                         public function getAge(): ?int
+                         {
+                             $date_naissance=$this->getDateBirth();
+                             $today=new \DateTime();
+                             $diff= $date_naissance->diff($today);
+                             $annees= intval($diff->format("%Y"));
+                             return $annees;
+                         }
+                         public function isMajeur() : bool
+                         {
+                             return $this->getAge()>=18;
+                         }
+                     
+                         /**
+                          * @Assert\Callback
+                         */
+                         public function validate(ExecutionContextInterface $context, $payload)
+                         {
+                             if (!$this->isMajeur() ) {
+                                 $context->buildViolation('Vous devez etre majeur pour vous incrire.')
+                                     ->atPath('dateBirth')
+                                     ->addViolation();
+                             }
+                             if(!preg_match("((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})",$this->getPlainPassword())){
+                                 $context->buildViolation('Votre mot de passe doit contenir au moins 8 caractères alpha numeriques (chiffre + minuscule + majuscule)')
+                                 ->atPath('plainPassword')
+                                 ->addViolation();
+                             }
+                             //plainPassword  ((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})
+                         }
+                     
+                     
+                         public function getProfile(): ?Profile
+                         {
+                             return $this->profile;
+                         }
+                     
+                         public function setProfile(?Profile $profile): self
+                         {
+                             $this->profile = $profile;
+                     
+                             return $this;
+                         }
+                     
+                     
+                         /**
+                      * @return Collection|Sortie[]
+                      */
+                     public function getSorties(): ArrayCollection
+                     {
+                         return $this->sorties;
+                     }
+                     
+                     public function addSorty(Sortie $sorty): self
+                     {
+                         if (!$this->sorties->contains($sorty)) {
+                             $this->sorties[] = $sorty;
+                            // $sorty->setTypeSortie($this);
+                         }
+                     
+                         return $this;
+                     }
+                     
+                     public function removeSorty(Sortie $sorty): self
+                     {
+                         if ($this->sorties->contains($sorty)) {
+                             $this->sorties->removeElement($sorty);
+                             // set the owning side to null (unless already changed)
+                             if ($sorty->getTypeSortie() === $this) {
+                                 $sorty->setTypeSortie(null);
+                             }
+                         }
+                     
+                         return $this;
+                     }
+                     
+                         /**
+                          * Get the value of lastActivity
+                          */ 
+                         public function getLastActivity() :?\DateTime
+                         {
+                             return $this->lastActivity;
+                         }
+                     
+                         /**
+                          * Set the value of lastActivity
+                          *
+                          * @return  self
+                          */ 
+                         public function setLastActivity(\DateTime $lastActivity) :self
+                         {
+                             $this->lastActivity = $lastActivity;
+                     
+                             return $this;
+                         }
+                     
+                         public function isActiveNow()
+                         {
+                             $this->setLastActivity(new \DateTime());
+                         }
+      
+                         /**
+                          * @return Collection|Commentaire[]
+                          */
+                         public function getCommentaires(): Collection
+                         {
+                             return $this->commentaires;
+                         }
+   
+                         public function addCommentaire(Commentaire $commentaire): self
+                         {
+                             if (!$this->commentaires->contains($commentaire)) {
+                                 $this->commentaires[] = $commentaire;
+                                 $commentaire->setAuteur($this);
+                             }
+   
+                             return $this;
+                         }
 
-    /**
-     * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue(strategy="AUTO")
-    */
-    protected $id;
-    /**
-     *  @ORM\Column(name="sexe",type="string", nullable=true)
-    *  @Assert\NotBlank()
-    */
-    protected $sexe;
+                         public function removeCommentaire(Commentaire $commentaire): self
+                         {
+                             if ($this->commentaires->contains($commentaire)) {
+                                 $this->commentaires->removeElement($commentaire);
+                                 // set the owning side to null (unless already changed)
+                                 if ($commentaire->getAuteur() === $this) {
+                                     $commentaire->setAuteur(null);
+                                 }
+                             }
 
-    /**
-     *  @ORM\Column(name="prenom",type="string", nullable=true)
-    *  @Assert\NotBlank()
-    */
-    protected $prenom;
-
-    
-    /**
-     *  @ORM\Column(name="date_birth",type="datetime", nullable=true)
-    *  @Assert\NotBlank()
-    *  @Assert\DateTime()
-    */
-    protected $dateBirth;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Profile", cascade={"persist"})
-    * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
-    */
-    protected $profile;
-
-    /**
-     *  @ORM\Column(name="date_inscription",type="datetime", nullable=true)
-    *  @Assert\NotBlank()
-    *  @Assert\DateTime()
-    */
-    protected $dateInscription;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
-     */
-    private $sorties;
-
-    /**
-    *  @ORM\Column(name="last_activity",type="datetime", nullable=true)
-    *  @Assert\DateTime()
-    */
-    protected $lastActivity;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->dateInscription= new \DateTime('now',new \DateTimeZone('Europe/Paris'));
-        $this->sorties = new ArrayCollection();
-    }
-    
-    /**
-     * @return \DateTime
-    */
-    public function getDateInscription()
-    {
-        return $this->dateInscription;
-    }
-
-    public function getSexe()
-    {
-        return $this->sexe;
-    }
-
-    public function setSexe(string $sexe)
-    {
-        $this->sexe = $sexe;
-
-        return $this;
-    }
-    /**
-     * @return boolean
-    */
-    public function isHomme(){
-        return $this->sexe === "H";
-    }
-
-    /**
-     * @return string
-    */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
-    /**
-     * @param string
-    */
-    public function setPrenom(string $prenom)
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-
-    /**
-     * Get the value of dateBirth
-    */ 
-    public function getDateBirth()
-    {
-        return $this->dateBirth;
-    }
-
-    /**
-     * Set the value of dateBirth
-    *
-    * @return  self
-    */ 
-    public function setDateBirth($dateBirth)
-    {
-        $this->dateBirth = $dateBirth;
-        return $this;
-    }
-
-    public function getAge(): ?int
-    {
-        $date_naissance=$this->getDateBirth();
-        $today=new \DateTime();
-        $diff= $date_naissance->diff($today);
-        $annees= intval($diff->format("%Y"));
-        return $annees;
-    }
-    public function isMajeur() : bool
-    {
-        return $this->getAge()>=18;
-    }
-
-    /**
-     * @Assert\Callback
-    */
-    public function validate(ExecutionContextInterface $context, $payload)
-    {
-        if (!$this->isMajeur() ) {
-            $context->buildViolation('Vous devez etre majeur pour vous incrire.')
-                ->atPath('dateBirth')
-                ->addViolation();
-        }
-        if(!preg_match("((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})",$this->getPlainPassword())){
-            $context->buildViolation('Votre mot de passe doit contenir au moins 8 caractères alpha numeriques (chiffre + minuscule + majuscule)')
-            ->atPath('plainPassword')
-            ->addViolation();
-        }
-        //plainPassword  ((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})
-    }
-
-
-    public function getProfile(): ?Profile
-    {
-        return $this->profile;
-    }
-
-    public function setProfile(?Profile $profile): self
-    {
-        $this->profile = $profile;
-
-        return $this;
-    }
-
-
-    /**
- * @return Collection|Sortie[]
- */
-public function getSorties(): ArrayCollection
-{
-    return $this->sorties;
-}
-
-public function addSorty(Sortie $sorty): self
-{
-    if (!$this->sorties->contains($sorty)) {
-        $this->sorties[] = $sorty;
-       // $sorty->setTypeSortie($this);
-    }
-
-    return $this;
-}
-
-public function removeSorty(Sortie $sorty): self
-{
-    if ($this->sorties->contains($sorty)) {
-        $this->sorties->removeElement($sorty);
-        // set the owning side to null (unless already changed)
-        if ($sorty->getTypeSortie() === $this) {
-            $sorty->setTypeSortie(null);
-        }
-    }
-
-    return $this;
-}
-
-    /**
-     * Get the value of lastActivity
-     */ 
-    public function getLastActivity() :?\DateTime
-    {
-        return $this->lastActivity;
-    }
-
-    /**
-     * Set the value of lastActivity
-     *
-     * @return  self
-     */ 
-    public function setLastActivity(\DateTime $lastActivity) :self
-    {
-        $this->lastActivity = $lastActivity;
-
-        return $this;
-    }
-
-    public function isActiveNow()
-    {
-        $this->setLastActivity(new \DateTime());
-    }
-}
+                             return $this;
+                         }
+                     }
