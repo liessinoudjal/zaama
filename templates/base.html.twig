@@ -103,39 +103,44 @@
 
         </div>
       </div>
+      <!-- bannniere publicitaire-->
     </div class="container-fluid" id="ban-pub-horizontale">
       <p class="text-center">
         <img src="{{asset('images/banniere_publicitaire.gif')}}" alt="bannière publicitaire">
       </p>
-    <div>
     </div>
-<!-- breadcrumb-->
-    <ol class="breadcrumb">
-    {% for path,name in breadcrumb %}
-      {% if path is empty %}
-        <li class="breadcrumb-item ">{{name|raw}}</li>
-      {% else %}
-        <li class="breadcrumb-item "><a href="{{path(path)}}">{{name }}</a></li>
-      {% endif %}
-     {% endfor %}
-    </ol>
-  <!-- end breadcrumb-->
-<section class="container">
-{% if app.request.hasPreviousSession %}
-            {% for type, messages in app.session.flashBag.all %}
-                {% for message in messages %}
-                    <div class="alert alert-dismissible alert-{{ type }}">
-                      <button type="button" class="close" data-dismiss="alert">&times;</button>
-                           {{ message|trans({}, 'FOSUserBundle') }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        {% endif %}
-</section>
+    <!-- end bannniere publicitaire-->
+  
+    <!-- breadcrumb--> 
+    <div class="container"> 
+        <ol class="breadcrumb">
+        {% for path,name in breadcrumb %}
+          {% if path is empty %}
+            <li class="breadcrumb-item ">{{name|raw}}</li>
+          {% else %}
+            <li class="breadcrumb-item "><a href="{{path(path)}}">{{name }}</a></li>
+          {% endif %}
+        {% endfor %}
+        </ol> 
+    </div>
+    <!-- end breadcrumb-->
 
-<section class="container-fluid">
-  {% block body %}{% endblock %}
-</section>
+    <section class="container">
+    {% if app.request.hasPreviousSession %}
+                {% for type, messages in app.session.flashBag.all %}
+                    {% for message in messages %}
+                        <div class="alert alert-dismissible alert-{{ type }}">
+                          <button type="button" class="close" data-dismiss="alert">&times;</button>
+                              {{ message|trans({}, 'FOSUserBundle') }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+    </section>
+
+    <section class="container-fluid">
+      {% block body %}{% endblock %}
+    </section>
 
 {{ include('_footer.html.twig') }}
 
