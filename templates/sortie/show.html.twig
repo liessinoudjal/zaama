@@ -48,7 +48,7 @@
                             </ul>
                         <div class="profile-head">
                                     <h5>
-                                       {{sortie.dateSortie|localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y') }} à {{sortie.heureSortie}}
+                                       {{sortie.dateSortie|date('d-M-Y') }} à {{sortie.heureSortie}}
                                     </h5>
                                     <h6>{{sortie.typeSortie}}</h6>
                                     <p class="profile-rating">Inscrits : <span>8/{{sortie.nbPersonneMax}} </span></p>
