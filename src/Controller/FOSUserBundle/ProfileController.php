@@ -204,6 +204,9 @@ class ProfileController extends BaseRegistrationController
                 $event = new PhotoProfileAddedEvent($formEditPhoto,$user,$profile,$manager,$photo);
                 $eventDispatcher->dispatch(PhotoProfileAddedEvent::NAME, $event);
                 
+            }else{
+                //dd($formEditPhoto->getErrors());
+               $this->addFlash("danger", "Une erreur est survenue lors du chargement de votre photo. Contactez le support si le problème persiste.");
             }
             return  $this->redirectToRoute('profile');
     }

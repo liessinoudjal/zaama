@@ -45,9 +45,9 @@ class Profile
      * @Assert\NotBlank(message="Veuillez selectionner une photo.")
      * @Assert\File(mimeTypes={ "image/jpeg" ,"image/bmp","image/gif","image/png"})
      * @Assert\Image(
-     *     allowLandscape = false,
+     *     allowLandscape = true,
      *     allowPortrait = true,
-     *  allowLandscapeMessage="Image payase interdite ({{ width }}x{{ height }}px).Préférez une image portrait."
+     *      allowLandscapeMessage="Image paysage interdite ({{ width }}x{{ height }}px).Préférez une image portrait."
      * )
      */
     private $photo;
