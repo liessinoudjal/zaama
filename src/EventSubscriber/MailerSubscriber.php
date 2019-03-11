@@ -29,7 +29,7 @@ class MailerSubscriber implements EventSubscriberInterface
     public function onCommentaireAdded($event)
     {
         $message = (new \Swift_Message('Hello Email'))
-        ->setFrom('norepeat@example.com')
+        ->setFrom('zaama.contact@gmail.com')
         ->setTo($event->getOrganisateur()->getEmail())
         ->setBody(
             $this->container->get('twig')->render(
