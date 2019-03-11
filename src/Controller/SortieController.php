@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\CommentaireType;
 use App\Entity\Commentaire;
+use App\Events\SortieComentedEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @Route("/sortie")
@@ -123,7 +125,7 @@ class SortieController extends AbstractController
      /**
      * @Route("/add/commenaire/{id}", name="sortie_add_commentaire", methods={"POST"}, requirements={"id"="\d+"})
      */
-    public function addCommentaire(Sortie $sortie, Request $request): Response
+    public function addCommentaire(Sortie $sortie, Request $request,EventDispatcherInterface $eventDispatcher): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER','Sortie','Vous devez être connecté pour acceder au détail de cette sortie');
         $commentaire= new Commentaire();
@@ -138,6 +140,8 @@ class SortieController extends AbstractController
             $sortie->addCommentaire($commentaire);
             $em->persist($sortie);
             $em->flush();
+            $event = new SortieComentedEvent($sortie,$this->getUser());
+            $eventDispatcher->dispatch(SortieComentedEvent::CommentaireAdded, $event);
             $this->addFlash('success', 'Commentaire ajouté');
 
         }

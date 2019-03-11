@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class PhotoProfileAddedEvent extends Event
 {
-    const NAME = 'photo_profile_added';
+    const photoProfileAdded = 'photo_profile_added';
 
     private $formEditPhoto;
     private $profile;

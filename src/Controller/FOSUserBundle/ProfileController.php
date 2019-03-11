@@ -202,7 +202,7 @@ class ProfileController extends BaseRegistrationController
             if ($formEditPhoto->isSubmitted() && $formEditPhoto->isValid()) {
                 //ajoute une photo au profile
                 $event = new PhotoProfileAddedEvent($formEditPhoto,$user,$profile,$manager,$photo);
-                $eventDispatcher->dispatch(PhotoProfileAddedEvent::NAME, $event);
+                $eventDispatcher->dispatch(PhotoProfileAddedEvent::photoProfileAdded, $event);
                 
             }else{
                 //dd($formEditPhoto->getErrors());
