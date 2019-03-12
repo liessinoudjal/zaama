@@ -343,7 +343,7 @@
                     <tr>
                       <td>
                         <p>Bonjour {{sortie.Organisateur.prenom}}</p>
-                        <p>Votre sortie "{{sortie.intitule}}" vient d'etre commentée par <a href="{{auteurPath}}">{{auteur.username}}</a></p>
+                        <p>Votre sortie "{{sortie.intitule}}" vient d'etre commentée par <a href="{{url('default_show_profile', {id : auteur.id} )}}">{{auteur.username}}</a></p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -351,7 +351,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="{{ sortiePath }}" target="_blank">Voir la sortie</a> </td>
+                                      <td> <a href="{{ url('sortie_show',{ id: sortie.id } ) }}" target="_blank">Voir la sortie</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>

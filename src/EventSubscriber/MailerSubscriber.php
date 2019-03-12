@@ -36,12 +36,11 @@ class MailerSubscriber implements EventSubscriberInterface
                 'Email/commentaire_added.html.twig',[
                     "sortie"=>$event->getSortie(), 
                      "auteur"=> $event->getAuteur(),
-                     "sortiePath" => $this->container->get('router')->generate("sortie_show", ["id"=> $event->getSortie()->getId()]),
-                     "auteurPath" => $this->container->get('router')->generate("default_show_profile", ["id"=> $event->getAuteur()->getId()])
                 ]
             ),'text/html'
         )
     ;
+   // dd($this->mailer->send($message));
     $this->mailer->send($message);
 
     }
