@@ -28,13 +28,17 @@ class MailerSubscriber implements EventSubscriberInterface
 
     public function onCommentaireAdded($event)
     {
-        $message = (new \Swift_Message('Hello Email'))
+        $message = (new \Swift_Message('Nouveau commentaire'))
         ->setFrom('zaama.contact@gmail.com')
         ->setTo($event->getOrganisateur()->getEmail())
         ->setBody(
             $this->container->get('twig')->render(
-                'Email/commentaire_added.html.twig',
-                ["sortie"=>$event->getSortie(), "auteur"=> $event->getAuteur()]
+                'Email/commentaire_added.html.twig',[
+                    "sortie"=>$event->getSortie(), 
+                     "auteur"=> $event->getAuteur(),
+                     "sortiePath" => $this->container->get('router')->generate("sortie_show", ["id"=> $event->getSortie()->getId()]),
+                     "auteurPath" => $this->container->get('router')->generate("default_show_profile", ["id"=> $event->getAuteur()->getId()])
+                ]
             ),'text/html'
         )
     ;
